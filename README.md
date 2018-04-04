@@ -1,9 +1,9 @@
 # Facturama
-Facturama python wrapper https://www.api.facturama.com.mx/
+Facturama python wrapper https://api.facturama.mx/
 
 Install
 ```sh
-pip install -e git://github.com/tingsystems/facturama.git@master#egg=facturama
+pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
 ```
 
 NOTE: The Wrapper by default use api base of Facturama
@@ -32,7 +32,10 @@ customer_object = {
         "Country": "MX"
     },
     "Rfc": "GARR900630G98",
-    "Name": "Pollitux"
+    "Name": "Pollitux",
+    "CfdiUse": "P01",
+    "TaxResidence": "",
+    "NumRegIdTrib": ""
  }
 customer = facturama.Client.create(customer_object)
 ```
@@ -47,13 +50,35 @@ facturama._credentials = ('username', 'password')
 
 
 product_object = {
-    "Id": "0001",
-    "Unit": "PZA",
-    "IdentificationNumber": "0001",
-    "Name": "Product test1",
-    "Description": "Product test 1",
-    "Price": 6.0
-}
+      "Unit": "Servicio",
+      "UnitCode": "E48",
+      "IdentificationNumber": "WEB003",
+      "Name": "Sitio Web CMS",
+      "Description": "Desarrollo de sitio web empleando un CMS",
+      "Price": 6500,
+      "CodeProdServ": "43232408",
+      "CuentaPredial": "123",
+      "Taxes": [
+        {
+          "Name": "IVA",
+          "Rate": 0.16,
+          "IsRetention": False,
+          "IsFederalTax": True
+        },
+        {
+          "Name": "ISR",
+          "IsRetention": True,
+          "IsFederalTax": True,
+          "Total": 0.10
+        },
+        {
+          "Name": "IVA",
+          "IsRetention": True,
+          "IsFederalTax": True,
+          "Total": 0.106667
+        }
+      ]
+    }
 
 product = facturama.Product.create(product_object)
 
@@ -90,12 +115,13 @@ Create new Cfdi
 
 The wrapper support the version cfids 
 
-0 api default\
+
+http://api.facturama.mx/2/
 1 api and cfdi 2\
-2 api-lite\
+http://api.facturama.mx/api-lite/2/
 3 api-lite and cfdi 2\
 
-You can see https://api.facturama.com.mx/Help for more information
+You can see https://api.facturama.mx/Docs for more information
  
 ```python
 import facturama 
@@ -103,36 +129,71 @@ import facturama
 facturama._credentials = ('username', 'password')
 
 cfdi_object = {
-    "CfdiType": "ingreso",
-    "IdBranchOffice": "KI2C2GeiviBPKVZRxX6GLg2",
-    "IdClient": "MdkB7dsxLN8XmQGjKHHF4g2",
-    "PaymentMethod": "TRANSFERENCIA ELECTRONICA DE FONDOS",
-    "PaymentAccountNumber": "5143",
-    "Currency": "MXN",
-    "Subtotal": 950.66,
-    "Discount": 0.0,
-    "Total": 1102.76,
-    "Items": [
-        {
-            "IdProduct": "0WV1zSDPmulwL3OGEIbbPw2",
-            "Quantity": 2.0,
-            "Total": 7.2,
-            "TaxPercentage": 0.0,
-            "Subtotal": 5.0
-        }
-    ],
-    "Taxes": [
-        {
-            "Total": 152.1,
-            "Name": "IVA",
-            "Rate": 16.0,
-            "Type": 1
-        }
-    ]
-}
+        "Folio": "100",
+        "Serie": "R",
+        "Currency": "MXN",
+        "ExpeditionPlace": "78116",
+        "PaymentConditions": "CREDITO A SIETE DIAS",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Issuer": {
+            "FiscalRegime": "601",
+            "Rfc": "ESO1202108R2",
+            "Name": "SinDelantal Mexico"
+        },
+        "Receiver": {
+            "Rfc": "XAXX010101000",
+            "Name": "RADIAL SOFTWARE SOLUTIONS",
+            "CfdiUse": "P01"
+        },
+        "Items": [
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
+                "Quantity": 2.0,
+                "Subtotal": 100.0,
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            },
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "001",
+                "Description": "SERVICIO DE COLOCACION",
+                "Unit": "NO APLICA",
+                "UnitCode": "E49",
+                "UnitPrice": 100.0,
+                "Quantity": 15.0,
+                "Subtotal": 1500.0,
+                "Discount": 0.0,
+                "Taxes": [
+                    {
+                        "Total": 240.0,
+                        "Name": "IVA",
+                        "Base": 1500.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 1740.0
+            }
+        ]
+    }
 
-cfdi = facturama.Cfdi.create(cfdi_object) # create cfdi version 0
-cfdi = facturama.Cfdi.create(cfdi_object, v=3) # create cfdi version 2 and api-lite 
+
+cfdi = facturama.Cfdi.create(cfdi_object, v=3) # create cfdi version 3.3 and api-lite
 
 ```
 

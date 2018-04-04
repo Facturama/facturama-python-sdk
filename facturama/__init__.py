@@ -77,7 +77,7 @@ class Facturama:
         :return:
         """
         # urls base of facturama api
-        host = 'http://apisandbox.facturama.com.mx' if sandbox else 'https://www.api.facturama.com.mx'
+        host = 'https://apisandbox.facturama.mx' if sandbox else 'https://api.facturama.mx'
         uris = [
             '{}/api/'.format(host),
             '{}/api/2/'.format(host),
@@ -91,6 +91,7 @@ class Facturama:
         body = request(
             method, '{}{}'.format(api_base, path), data=json.dumps(payload), params=params, headers=cls._headers
         )
+
         if body.status_code == 200 or body.status_code == 201 or body.status_code == 204:
             response_body = {'status': True}
             try:

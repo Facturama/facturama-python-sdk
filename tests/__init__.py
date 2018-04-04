@@ -3,6 +3,7 @@ import random
 import facturama
 
 
+
 class BaseEndpointTestCase(unittest.TestCase):
     random.seed()
 
@@ -23,18 +24,43 @@ class BaseEndpointTestCase(unittest.TestCase):
             "Country": "MX"
         },
         "Rfc": "GARR900630G98",
-        "Name": "Pollitux"
+        "Name": "Pollitux",
+        "CfdiUse": "P01",
+        "TaxResidence": "",
+        "NumRegIdTrib": ""
     }
+
 
     product_object = {
-        "Id": "0001",
-        "Unit": "PZA",
-        "IdentificationNumber": "0001",
-        "Name": "Product test1",
-        "Description": "Product test 1",
-        "Price": 6.0
+      "Unit": "Servicio",
+      "UnitCode": "E48",
+      "IdentificationNumber": "WEB003",
+      "Name": "Sitio Web CMS",
+      "Description": "Desarrollo de sitio web empleando un CMS",
+      "Price": 6500,
+      "CodeProdServ": "43232408",
+      "CuentaPredial": "123",
+      "Taxes": [
+        {
+          "Name": "IVA",
+          "Rate": 0.16,
+          "IsRetention": False,
+          "IsFederalTax": True
+        },
+        {
+          "Name": "ISR",
+          "IsRetention": True,
+          "IsFederalTax": True,
+          "Total": 0.10
+        },
+        {
+          "Name": "IVA",
+          "IsRetention": True,
+          "IsFederalTax": True,
+          "Total": 0.106667
+        }
+      ]
     }
-
     branch_office_object = {
         "Name": "Corp Inc",
         "Description": "Desc corp",
@@ -51,31 +77,68 @@ class BaseEndpointTestCase(unittest.TestCase):
         },
     }
 
-    cfdi_object = {
-        "CfdiType": "ingreso",
-        "IdBranchOffice": "KI2C2GeiviBPKVZRxX6GLg2",
-        "IdClient": "MdkB7dsxLN8XmQGjKHHF4g2",
-        "PaymentMethod": "TRANSFERENCIA ELECTRONICA DE FONDOS",
-        "PaymentAccountNumber": "5143",
+
+
+    cfdi_object ={
+        "Folio": "100",
+        "Serie": "R",
         "Currency": "MXN",
-        "Subtotal": 950.66,
-        "Discount": 0.0,
-        "Total": 1102.76,
+        "ExpeditionPlace": "78116",
+        "PaymentConditions": "CREDITO A SIETE DIAS",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Issuer": {
+            "FiscalRegime": "601",
+            "Rfc": "ESO1202108R2",
+            "Name": "SinDelantal Mexico"
+        },
+        "Receiver": {
+            "Rfc": "XAXX010101000",
+            "Name": "RADIAL SOFTWARE SOLUTIONS",
+            "CfdiUse": "P01"
+        },
         "Items": [
             {
-                "IdProduct": "0WV1zSDPmulwL3OGEIbbPw2",
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
                 "Quantity": 2.0,
-                "Total": 7.2,
-                "TaxPercentage": 0.0,
-                "Subtotal": 5.0
-            }
-        ],
-        "Taxes": [
+                "Subtotal": 100.0,
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            },
             {
-                "Total": 152.1,
-                "Name": "IVA",
-                "Rate": 16.0,
-                "Type": 1
+                "ProductCode": "10101504",
+                "IdentificationNumber": "001",
+                "Description": "SERVICIO DE COLOCACION",
+                "Unit": "NO APLICA",
+                "UnitCode": "E49",
+                "UnitPrice": 100.0,
+                "Quantity": 15.0,
+                "Subtotal": 1500.0,
+                "Discount": 0.0,
+                "Taxes": [
+                    {
+                        "Total": 240.0,
+                        "Name": "IVA",
+                        "Base": 1500.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 1740.0
             }
         ]
     }
