@@ -1,15 +1,15 @@
 # Facturama
 Facturama python wrapper https://api.facturama.mx/
 
-Install
+Instalación
 ```sh
 pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
 ```
 
-NOTE: The Wrapper by default use api base of Facturama
 
 
-Crete new Client
+
+Crear nuevo Cliente
 
 
 ```python
@@ -40,8 +40,26 @@ customer_object = {
 customer = facturama.Client.create(customer_object)
 ```
 
+Listar Clientes:
+```python
+import facturama
 
-Create new Product
+facturama._credentials = ('username', 'password')
+customers = facturama.Client.all()
+
+```
+
+Obtener Detalles de un Cliente:
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+customer = facturama.Client.retrieve('98DY-y6qSikkykW2nhp9kw2')
+
+```
+
+Crear nuevo Producto
 
 ```python
 import facturama
@@ -83,8 +101,19 @@ product_object = {
 product = facturama.Product.create(product_object)
 
 ```
- 
-Create new Branch Office
+
+Listar Productos:
+
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+products = facturama.Product.all()
+
+```
+
+Crear nueva Sucursal (Branch Office)
   
 ```python
 import facturama 
@@ -111,9 +140,19 @@ branch = facturama.BranchOffice.create(branch_office_object)
 
 ```
 
-Create new Cfdi
+Listar Sucursales:
 
-You can see https://api.facturama.mx/Docs for more information
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+sucursales = facturama.BranchOffice.all()
+
+```
+
+Crear nuevo CFDI 3.3
+
+Documentación en https://api.facturama.mx/Docs
  
 ```python
 import facturama 
@@ -185,13 +224,60 @@ cfdi_object = {
     }
 
 
-cfdi = facturama.Cfdi.create(cfdi_object) # create cfdi version 3.3 and api-lite
+cfdi = facturama.Cfdi.create(cfdi_object)
+
+
+```
+
+Descarga CFDI:
+
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+html_file = facturama.Cfdi.get_by_file('html', 'IssuedLite', 'OwMgofF7ZDEM60gerUXudw2')
+facturama.api_lite = True
+html_name = '{}.html'.format('nombreDelHtml')
+with open(html_name, 'wb') as f:
+    f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+
+```
+
+Cancelar CFDI:
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+facturama.api_lite = True
+facturama.Cfdi.delete('OwMgofF7ZDEM60gerUXudw1')
+```
+
+Listar CFDI:
+Por tipo, keyword, status  mas información en: https://api.facturama.mx/docs/api/GET-Cfdi_type_keyword_status
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+lista = facturama.Cfdi.list('issued','Expresion en Software','all')
+
+```
+
+Enviar por mail:
+
+```python
+import facturama
+
+facturama._credentials = ('username', 'password')
+facturama.Cfdi.send_by_email('issued','GgQKVvV84IlgmFCMqJVraQ2','mail@mail.com')
 
 ```
 
 ## Library Development and Testing
 
-You can test the facturama library with nose from the facturama library root:
+Test de libreria con nose http://nose.readthedocs.io/en/latest/
 
 ```sh
 $ nosetests

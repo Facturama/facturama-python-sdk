@@ -18,3 +18,13 @@ class CfdiEndpointTestCase(BaseEndpointTestCase):
         self.client.api_lite = True
         tmp = self.client.Cfdi.create(self.cfdi_object.copy())
         assert tmp
+
+    def test_cfdi_list(self):
+        self.client._credentials = ('pruebas', 'pruebas2011')
+        tmp = self.client.Cfdi.list('issued','Expresion en Software','all')
+        assert tmp
+
+    def test_cfdi_email(self):
+        self.client._credentials = ('pruebas', 'pruebas2011')
+        tmp = self.client.Cfdi.send_by_email('issued','GgQKVvV84IlgmFCMqJVraQ2','mail@mail.com')
+        assert tmp
