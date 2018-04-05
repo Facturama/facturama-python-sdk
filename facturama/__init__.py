@@ -77,6 +77,12 @@ class Facturama:
         :return:
         """
         # urls base of facturama api
+
+        """
+        http://api.facturama.mx/2/ - opción 1 api and cfdi 3.3
+        http://api.facturama.mx/api-lite/2/ - opción 3 api-lite and cfdi 2
+        """
+
         host = 'https://apisandbox.facturama.mx' if sandbox else 'https://api.facturama.mx'
         uris = [
             '{}/api/'.format(host),
@@ -87,7 +93,6 @@ class Facturama:
         api_base = uris[version]
         cls.aut_api()
         method = str(method).lower()
-
         body = request(
             method, '{}{}'.format(api_base, path), data=json.dumps(payload), params=params, headers=cls._headers
         )
@@ -197,7 +202,7 @@ class Cfdi(Facturama):
     """
 
     @classmethod
-    def create(cls, data, v=0):
+    def create(cls, data, v=3):
         """
 
         :param v: cfdi version 0 api, 1 api and cfdi 3.3, 2 api-lite, 3 api-lite and cfdi 3.3

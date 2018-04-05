@@ -113,14 +113,6 @@ branch = facturama.BranchOffice.create(branch_office_object)
 
 Create new Cfdi
 
-The wrapper support the version cfids 
-
-
-http://api.facturama.mx/2/
-1 api and cfdi 2\
-http://api.facturama.mx/api-lite/2/
-3 api-lite and cfdi 2\
-
 You can see https://api.facturama.mx/Docs for more information
  
 ```python
@@ -193,7 +185,7 @@ cfdi_object = {
     }
 
 
-cfdi = facturama.Cfdi.create(cfdi_object, v=3) # create cfdi version 3.3 and api-lite
+cfdi = facturama.Cfdi.create(cfdi_object) # create cfdi version 3.3 and api-lite
 
 ```
 
