@@ -1,7 +1,7 @@
 # Facturama
 Facturama python wrapper https://api.facturama.mx/
 
-Instalación
+## Instalación
 ```sh
 pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
 ```
@@ -9,7 +9,7 @@ pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=fa
 
 
 
-Crear nuevo Cliente
+## Crear nuevo Cliente
 
 
 ```python
@@ -40,7 +40,7 @@ customer_object = {
 customer = facturama.Client.create(customer_object)
 ```
 
-Listar Clientes:
+## Listar Clientes:
 ```python
 import facturama
 
@@ -49,7 +49,7 @@ customers = facturama.Client.all()
 
 ```
 
-Obtener Detalles de un Cliente:
+## Obtener Detalles de un Cliente:
 
 ```python
 import facturama
@@ -59,7 +59,7 @@ customer = facturama.Client.retrieve('98DY-y6qSikkykW2nhp9kw2')
 
 ```
 
-Crear nuevo Producto
+## Crear nuevo Producto
 
 ```python
 import facturama
@@ -102,7 +102,7 @@ product = facturama.Product.create(product_object)
 
 ```
 
-Listar Productos:
+## Listar Productos:
 
 
 ```python
@@ -113,7 +113,7 @@ products = facturama.Product.all()
 
 ```
 
-Crear nueva Sucursal (Branch Office)
+## Crear nueva Sucursal (Branch Office)
   
 ```python
 import facturama 
@@ -140,7 +140,7 @@ branch = facturama.BranchOffice.create(branch_office_object)
 
 ```
 
-Listar Sucursales:
+## Listar Sucursales:
 
 ```python
 import facturama
@@ -150,7 +150,7 @@ sucursales = facturama.BranchOffice.all()
 
 ```
 
-Crear nuevo CFDI 3.3
+## Crear nuevo CFDI 3.3
 
 Documentación en https://api.facturama.mx/Docs
  
@@ -229,7 +229,7 @@ cfdi = facturama.Cfdi.create(cfdi_object)
 
 ```
 
-Descarga CFDI:
+## Descarga CFDI:
 
 
 ```python
@@ -244,7 +244,7 @@ with open(html_name, 'wb') as f:
 
 ```
 
-Cancelar CFDI:
+## Cancelar CFDI:
 
 ```python
 import facturama
@@ -254,7 +254,7 @@ facturama.api_lite = True
 facturama.Cfdi.delete('OwMgofF7ZDEM60gerUXudw1')
 ```
 
-Listar CFDI:
+## Listar CFDI:
 Por tipo, keyword, status  mas información en: https://api.facturama.mx/docs/api/GET-Cfdi_type_keyword_status
 
 ```python
@@ -265,7 +265,7 @@ lista = facturama.Cfdi.list('issued','Expresion en Software','all')
 
 ```
 
-Enviar por mail:
+## Enviar CFDI por mail:
 
 ```python
 import facturama
