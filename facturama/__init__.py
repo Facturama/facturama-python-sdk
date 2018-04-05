@@ -223,7 +223,18 @@ class Cfdi(Facturama):
         """
         :return: get cfdi file by format and type
         """
-        html_file = cls.get_by_file('html', 'IssuedLite',oid)
+        html_file = cls.get_by_file('pdf', 'IssuedLite',oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def saveAsHtml(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('html', 'IssuedLite', oid)
         cls.api_lite = True
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))

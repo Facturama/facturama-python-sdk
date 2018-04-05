@@ -236,11 +236,10 @@ cfdi = facturama.Cfdi.create(cfdi_object)
 import facturama
 
 facturama._credentials = ('username', 'password')
-html_file = facturama.Cfdi.get_by_file('html', 'IssuedLite', 'OwMgofF7ZDEM60gerUXudw2')
 facturama.api_lite = True
-html_name = '{}.html'.format('nombreDelHtml')
-with open(html_name, 'wb') as f:
-    f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+html_file = facturama.Cfdi.saveAsHtml('OwMgofF7ZDEM60gerUXudw2', 'nombreArchivo.html')
+pdf_file = facturama.Cfdi.saveAsPdf('OwMgofF7ZDEM60gerUXudw2', 'nombreArchivo.pdf')
+
 
 ```
 

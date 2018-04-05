@@ -33,3 +33,8 @@ class CfdiEndpointTestCase(BaseEndpointTestCase):
         self.client._credentials = ('pruebas', 'pruebas2011')
         file = self.client.Cfdi.saveAsPdf('OwMgofF7ZDEM60gerUXudw2','nombre.pdf')
         assert file
+
+    def test_cfdi_saveAsHtml(self):
+        self.client._credentials = ('pruebas', 'pruebas2011')
+        file = self.client.Cfdi.saveAsHtml('OwMgofF7ZDEM60gerUXudw2','nombre.html')
+        assert file
