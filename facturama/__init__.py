@@ -219,6 +219,17 @@ class Cfdi(Facturama):
         return cls.build_http_request('get', '{}/{}/{}/{}'.format(cls.__name__, f, t, oid))
 
     @classmethod
+    def saveAsPdf(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('html', 'IssuedLite',oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
     def send_by_email(cls, t, oid, email):
         """
         :return: send Cfdi by email

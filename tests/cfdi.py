@@ -28,3 +28,8 @@ class CfdiEndpointTestCase(BaseEndpointTestCase):
         self.client._credentials = ('pruebas', 'pruebas2011')
         tmp = self.client.Cfdi.send_by_email('issued','GgQKVvV84IlgmFCMqJVraQ2','mail@mail.com')
         assert tmp
+
+    def test_cfdi_saveAsPdf(self):
+        self.client._credentials = ('pruebas', 'pruebas2011')
+        file = self.client.Cfdi.saveAsPdf('OwMgofF7ZDEM60gerUXudw2','nombre.pdf')
+        assert file
