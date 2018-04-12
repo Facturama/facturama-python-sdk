@@ -5,6 +5,7 @@
 import base64
 from requests import request
 
+
 try:
     import json
 except ImportError:
@@ -419,3 +420,160 @@ class CfdiUsesCatalog(Catalogs):
     """
     prefix = 'catalogs'
     catalog = 'CfdiUses'
+
+class CfdiMultiEmisor(Facturama):
+    """
+    Opr with Cfdi of Facturama API
+    """
+
+    @classmethod
+    def create(cls, data, v=3):
+        """
+
+        :param v: cfdi version 0 api, 1 api and cfdi 3.3, 2 api-lite, 3 api-lite and cfdi 3.3
+        :param data: dict with data for create object
+        :return: object with data from response
+        """
+        return cls.to_object(cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v))
+
+    @classmethod
+    def get_by_file(cls, f, t, oid):
+        """
+        :return: get cfdi file by format and type
+        """
+        return cls.build_http_request('get', '{}/{}/{}/{}'.format('Cfdi', f, t, oid))
+
+    @classmethod
+    def saveAsPdf(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('pdf', 'IssuedLite',oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def saveAsHtml(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('html', 'IssuedLite', oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+
+    @classmethod
+    def delete(cls, oid):
+        """
+        :param oid: id object
+        :return: None
+        """
+
+        return cls.build_http_request(
+            'delete', '{}/{}'.format('cfdis', oid), version=3)
+
+    @classmethod
+    def list(cls, filters):
+        """
+        :param filters: dict filters
+        :return: None
+        """
+        return cls.build_http_request('get','cfdis', params=filters, version=2)
+
+
+    @classmethod
+    def detail(cls, oid):
+        """
+        :param oid: id object
+        :return: None
+        """
+        return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=2)
+
+
+class csdsMultiEmisor(Facturama):
+    """
+    Opr with csds of Facturama API
+    """
+
+    @classmethod
+    def get_by_rfc(cls, rfc):
+        """
+        get csds by rfc
+        :return: object with data from response
+        """
+        return cls.to_object(cls.build_http_request('get', '{}/{}'.format('csds', rfc), version=2))
+
+    @classmethod
+    def create(cls, data):
+        raise NotImplemented('Method not implemented')
+
+    @classmethod
+    def upload(cls, rfc, path_key, path_cer, password, encode=False):
+        """
+
+        :param encode:
+        :param rfc:
+        :param path_key:
+        :param path_cer:
+        :param password:
+        :param v:
+        :return: object with data from response
+        """
+        file_key, file_cer = path_key, path_cer
+        if not encode:
+            with open(path_key, 'rb') as f:
+                file_key = base64.b64encode(f.read()).decode('utf-8')
+
+            with open(path_cer, 'rb') as f:
+                file_cer = base64.b64encode(f.read()).decode('utf-8')
+
+        data = {
+            'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
+        }
+        return cls.build_http_request('post', 'csds', data, version=2)
+
+    @classmethod
+    def updateCsd(cls, rfc, path_key, path_cer, password, encode=False):
+        """
+
+        :param encode:
+        :param rfc:
+        :param path_key:
+        :param path_cer:
+        :param password:
+        :param v:
+        :return: object with data from response
+        """
+        file_key, file_cer = path_key, path_cer
+        if not encode:
+            with open(path_key, 'rb') as f:
+                file_key = base64.b64encode(f.read()).decode('utf-8')
+
+            with open(path_cer, 'rb') as f:
+                file_cer = base64.b64encode(f.read()).decode('utf-8')
+
+        data = {
+            'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
+        }
+        return cls.build_http_request('put', 'csds', data, version=2)
+
+
+    @classmethod
+    def delete(cls, rfc):
+        """
+        get csds by rfc
+        :return: object with data from response
+        """
+        return cls.to_object(cls.build_http_request('delete', '{}/{}'.format('csds', rfc), version=2))
+
+    @classmethod
+    def get(cls):
+        """
+        get csds by rfc
+        :return: object with data from response
+        """
+        return cls.to_object(cls.build_http_request('get', '{}'.format('csds'), version=2))
