@@ -273,7 +273,7 @@ facturama._credentials = ('username', 'password')
 facturama.Cfdi.send_by_email('issued','GgQKVvV84IlgmFCMqJVraQ2','mail@mail.com')
 
 ```
-##Operaciones API Multiemisor
+## Operaciones API Multiemisor
 
 - Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de
    estos por mail.
