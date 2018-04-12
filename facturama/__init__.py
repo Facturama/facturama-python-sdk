@@ -465,6 +465,16 @@ class CfdiMultiEmisor(Facturama):
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
         return f
 
+    @classmethod
+    def saveAsXML(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        xml_file = cls.get_by_file('xml', 'IssuedLite', oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(xml_file['Content'].encode('utf-8')))
+        return f
 
     @classmethod
     def delete(cls, oid):
