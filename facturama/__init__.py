@@ -203,14 +203,15 @@ class Cfdi(Facturama):
     """
 
     @classmethod
-    def create(cls, data, v=3):
+    def create(cls, data, v=1):
         """
 
         :param v: cfdi version 0 api, 1 api and cfdi 3.3, 2 api-lite, 3 api-lite and cfdi 3.3
         :param data: dict with data for create object
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v))
+
+        return cls.to_object(cls.build_http_request('post', 'cfdis' , data, version=v))
 
     @classmethod
     def get_by_file(cls, f, t, oid):
