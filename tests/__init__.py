@@ -142,3 +142,208 @@ class BaseEndpointTestCase(unittest.TestCase):
             }
         ]
     }
+
+    cfdi_object_complemento_pago = {
+        "Receiver": {
+            "Name": "SERVICIOS ADMINISTRATIVOS AXKAN DEL BAJIO S.C",
+            "CfdiUse": "P01",
+            "Rfc": "XEXX010101000"
+        },
+        "CfdiType": "P",
+        "NameId": "1",
+        "Folio": "93",
+        "ExpeditionPlace": "51873",
+        "Complemento": {
+            "Payments": [{
+                "Date": "2018-10-04",
+                "PaymentForm": "03",
+                "Amount": "11142.21",
+                "RelatedDocuments": [{
+                    "Uuid": "C94C8AF3-C774-4D4C-802E-781411934A6E",
+                    "Serie": "BQ",
+                    "Folio": "2205",
+                    "Currency": "USD",
+                    "ExchangeRate": "19.2107",
+                    "PaymentMethod": "PUE",
+                    "PartialityNumber": "1",
+                    "PreviousBalanceAmount": "1160.00",
+                    "AmountPaid": "580.00",
+                    "ImpSaldoInsoluto": "580.00"
+                }]
+            }]
+        }
+    }
+
+    cfdi_object_complemento_terceros={
+        "Receiver": {
+            "Name": "Jose de Jesus Romero Alvarado",
+            "CfdiUse": "G03",
+            "Rfc": "ROAJ850914837"
+        },
+        "CfdiType": "I",
+        "NameId": "01",
+        "ExpeditionPlace": "45037",
+        "PaymentForm": "01",
+        "PaymentMethod": "PUE",
+        "Decimals": "2",
+        "Currency": "MXN",
+        "Date": "2019-06-19T12:45:29",
+        "Items": [{
+            "Quantity": "1",
+            "ProductCode": "10121806",
+            "UnitCode": "58",
+            "Unit": " kilogramo neto",
+            "Description": "consumo",
+            "IdentificationNumber": "-",
+            "UnitPrice": "1000",
+            "Subtotal": "1000.00",
+            "Taxes": [{
+                "Name": "IVA",
+                "Rate": "0.16",
+                "Total": "160",
+                "Base": "1000",
+                "IsRetention": "false",
+                "IsFederalTax": "true"
+            }],
+            "Total": "1160.00",
+            "Complement": {
+                "ThirdPartyAccount": {
+                    "Rfc": "ESO1202108R2",
+                    "Name": "Expresion en Software",
+                    "Taxes": [{
+                        "Name": "IVA",
+                        "Rate": "0.16",
+                        "Amount": "1000"
+                    }]
+                }
+            }
+        }]
+    }
+
+    cfdi_object_multi_complemento_pago = {
+        "Issuer": {
+            "FiscalRegime": "601",
+            "Rfc": "AAA010101AAA",
+            "Name": "EXPRESION EN SOFTWARE"
+        },
+        "Receiver": {
+            "Name": "SERVICIOS ADMINISTRATIVOS AXKAN DEL BAJIO S.C",
+            "CfdiUse": "P01",
+            "Rfc": "SAA1609301X7"
+        },
+        "CfdiType": "P",
+        "NameId": "1",
+        "Folio": "93",
+        "ExpeditionPlace": "76140",
+        "Complemento": {
+            "Payments": [{
+                "Date": "2018-10-04",
+                "PaymentForm": "03",
+                "Amount": "11142.21",
+                "RelatedDocuments": [{
+                    "Uuid": "C94C8AF3-C774-4D4C-802E-781411934A6E",
+                    "Serie": "BQ",
+                    "Folio": "2205",
+                    "Currency": "USD",
+                    "ExchangeRate": "19.2107",
+                    "PaymentMethod": "PUE",
+                    "PartialityNumber": "1",
+                    "PreviousBalanceAmount": "1160.00",
+                    "AmountPaid": "580.00",
+                    "ImpSaldoInsoluto": "580.00"
+                }]
+            }]
+        }
+    }
+
+    cfdi_object_multi_complemento_donativos= {
+        "CfdiType": "I",
+        "Currency": "MXN",
+        "Date": "2019-06-19T13:45:00",
+        "ExpeditionPlace": "51873",
+        "NameId": "9",
+        "Folio": "94",
+        "PaymentForm": "12",
+        "PaymentMethod": "PUE",
+        "Serie": "Nueva",
+        "Complemento": {
+            "Donation": {
+                "AuthorizationDate": "30/01/2019",
+                "AuthorizationNumber": "B400-05-08-2014-005",
+                "Legend": "El comprobante es un donativo"
+            }
+        },
+        "Items": [{
+            "Description": "Cobija de lana y algodon",
+            "IdProduct": "LNzPKg5ydGCdkPAr8W1v7Q2",
+            "ProductCode": "20102000",
+            "IdentificationNumber": "FP114",
+            "Quantity": "3",
+            "Subtotal": "3000",
+            "Total": "3000",
+            "Unit": "NO APLICA",
+            "UnitCode": "EA",
+            "UnitPrice": "1000"
+        }],
+        "Issuer": {
+            "FiscalRegime": "601",
+            "Rfc": "AAA010101AAA",
+            "Name": "EXPRESION EN SOFTWARE"
+        },
+        "Receiver": {
+            "CfdiUse": "D04",
+            "Name": "Abarrotes del centro",
+            "Rfc": "XAXX010101000"
+        }
+    }
+
+    cfdi_object_multi_complemento_terceros = {
+        "Issuer": {
+            "FiscalRegime": "601",
+            "Rfc": "AAA010101AAA",
+            "Name": "EXPRESION EN SOFTWARE"
+        },
+        "Receiver": {
+            "Name": "Jose de Jesus Romero Alvarado",
+            "CfdiUse": "G03",
+            "Rfc": "ROAJ850914837"
+        },
+        "CfdiType": "I",
+        "NameId": "01",
+        "ExpeditionPlace": "45037",
+        "PaymentForm": "01",
+        "PaymentMethod": "PUE",
+        "Folio": "95",
+        "Currency": "MXN",
+        "Date": "2019-06-19T12:45:29",
+        "Items": [{
+            "Quantity": "1",
+            "ProductCode": "10121806",
+            "UnitCode": "58",
+            "Unit": " kilogramo neto",
+            "Description": "consumo",
+            "IdentificationNumber": "-",
+            "UnitPrice": "1000",
+            "Subtotal": "1000.00",
+            "Taxes": [{
+                "Name": "IVA",
+                "Rate": "0.16",
+                "Total": "160",
+                "Base": "1000",
+                "IsRetention": "false",
+                "IsFederalTax": "true"
+            }],
+            "Total": "1160.00",
+            "Complement": {
+                "ThirdPartyAccount": {
+                    "Rfc": "ESO1202108R2",
+                    "Name": "Expresion en Software",
+                    "Taxes": [{
+                        "Name": "IVA",
+                        "Rate": "0.16",
+                        "Amount": "1000"
+                    }]
+                }
+            }
+        }]
+    }

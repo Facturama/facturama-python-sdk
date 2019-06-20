@@ -225,8 +225,8 @@ class Cfdi(Facturama):
         """
         :return: get cfdi file by format and type
         """
-        html_file = cls.get_by_file('pdf', 'IssuedLite',oid)
-        cls.api_lite = True
+        issued = 'issuedLite' if api_lite else 'issued'
+        html_file = cls.get_by_file('pdf', issued, oid)
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
         return f
@@ -236,8 +236,8 @@ class Cfdi(Facturama):
         """
         :return: get cfdi file by format and type
         """
-        html_file = cls.get_by_file('html', 'IssuedLite', oid)
-        cls.api_lite = True
+        issued = 'issuedLite' if api_lite else 'issued'
+        html_file = cls.get_by_file('html', issued, oid)
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
         return f
