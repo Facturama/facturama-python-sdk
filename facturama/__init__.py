@@ -100,8 +100,8 @@ class Facturama:
 
         if body.status_code == 200 or body.status_code == 201 or body.status_code == 204:
             response_body = {'status': True}
-            try:
-                response_body = body.json()
+            try:                
+                response_body = body.json()                
             except Exception:
                 pass
             return response_body
@@ -312,7 +312,7 @@ class csds(Facturama):
             'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
         }
         return cls.build_http_request('post', cls.__name__, data, version=v)
-
+        
 
 class Catalogs(Facturama):
     catalog = None
@@ -435,7 +435,7 @@ class CfdiMultiEmisor(Facturama):
         :param data: dict with data for create object
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v))
+        return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
 
     @classmethod
     def get_by_file(cls, f, t, oid):
@@ -521,7 +521,7 @@ class csdsMultiEmisor(Facturama):
     @classmethod
     def create(cls, data):
         raise NotImplemented('Method not implemented')
-
+    
     @classmethod
     def upload(cls, rfc, path_key, path_cer, password, encode=False):
         """
@@ -548,7 +548,7 @@ class csdsMultiEmisor(Facturama):
         return cls.build_http_request('post', 'csds', data, version=2)
 
     @classmethod
-    def updateCsd(cls, rfc, path_key, path_cer, password, encode=False):
+    def update(cls, rfc, path_key, path_cer, password, encode=False):
         """
 
         :param encode:
@@ -570,8 +570,8 @@ class csdsMultiEmisor(Facturama):
         data = {
             'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
         }
-        return cls.build_http_request('put', 'csds', data, version=2)
-
+        return cls.build_http_request('put', '{}/{}'.format('csds', rfc), data, version=2)
+    
 
     @classmethod
     def delete(cls, rfc):
