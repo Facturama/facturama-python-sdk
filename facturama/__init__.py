@@ -435,7 +435,17 @@ class CfdiMultiEmisor(Facturama):
         :param data: dict with data for create object
         :return: object with data from response
         """
-        return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
+        return cls.to_object(cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v))
+
+    @classmethod
+    def retrieve(cls, oid, params=None):
+        """
+
+        :params oid: id of object
+        :return: object with data from response
+        """
+        return cls.to_object(cls.build_http_request('get', '{}/{}'.format('cfdis', oid), params=params, version=2))
+        #return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=3)
 
     @classmethod
     def get_by_file(cls, f, t, oid):
