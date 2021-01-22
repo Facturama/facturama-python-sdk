@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '2.0.3'
+__version__ = '2.1.0'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -99,9 +99,9 @@ class Facturama:
         )
 
         if body.status_code == 200 or body.status_code == 201 or body.status_code == 204:
-            response_body = {'status': True}
+            response_body = {'status': True}                        
             try:                
-                response_body = body.json()                
+                response_body = body.json()
             except Exception:
                 pass
             return response_body
@@ -134,7 +134,7 @@ class Facturama:
         :param data: dict with data for create object
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('post', cls.__name__, data))
+        return cls.build_http_request('post', cls.__name__, data)
 
     @classmethod
     def retrieve(cls, oid, params=None):
@@ -143,7 +143,7 @@ class Facturama:
         :params oid: id of object retrieve
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), params=params))
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), params=params)
 
     @classmethod
     def all(cls, params=None):
@@ -168,7 +168,7 @@ class Facturama:
         :type data: data
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('put', '{}/{}'.format(cls.__name__, oid), data))
+        return cls.build_http_request('put', '{}/{}'.format(cls.__name__, oid), data)
 
     @classmethod
     def delete(cls, oid):
@@ -211,7 +211,7 @@ class Cfdi(Facturama):
         :return: object with data from response
         """
 
-        return cls.to_object(cls.build_http_request('post', 'cfdis' , data, version=v))
+        return cls.build_http_request('post', 'cfdis' , data, version=v)
 
     @classmethod
     def get_by_file(cls, f, t, oid):
@@ -282,7 +282,7 @@ class csds(Facturama):
         get csds by rfc
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('get', '{}/{}'.format(cls.__name__, rfc), version=v))
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, rfc), version=v)
 
     @classmethod
     def create(cls, data):
@@ -435,7 +435,7 @@ class CfdiMultiEmisor(Facturama):
         :param data: dict with data for create object
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v))
+        return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
 
     @classmethod
     def retrieve(cls, oid, params=None):
@@ -444,7 +444,7 @@ class CfdiMultiEmisor(Facturama):
         :params oid: id of object
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('get', '{}/{}'.format('cfdis', oid), params=params, version=2))
+        return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), params=params, version=2)
         #return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=3)
 
     @classmethod
@@ -526,7 +526,7 @@ class csdsMultiEmisor(Facturama):
         get csds by rfc
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('get', '{}/{}'.format('csds', rfc), version=2))
+        return cls.build_http_request('get', '{}/{}'.format('csds', rfc), version=2)
 
     @classmethod
     def create(cls, data):
@@ -589,7 +589,7 @@ class csdsMultiEmisor(Facturama):
         get csds by rfc
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('delete', '{}/{}'.format('csds', rfc), version=2))
+        return cls.build_http_request('delete', '{}/{}'.format('csds', rfc), version=2)
 
     @classmethod
     def get(cls):
@@ -597,4 +597,4 @@ class csdsMultiEmisor(Facturama):
         get csds by rfc
         :return: object with data from response
         """
-        return cls.to_object(cls.build_http_request('get', '{}'.format('csds'), version=2))
+        return cls.build_http_request('get', '{}'.format('csds'), version=2)
