@@ -143,7 +143,8 @@ class Facturama:
         :params oid: id of object retrieve
         :return: object with data from response
         """
-        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), params=params)
+        params = {'type':'issued'}
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None , params=params)
 
     @classmethod
     def all(cls, params=None):
@@ -240,6 +241,18 @@ class Cfdi(Facturama):
         html_file = cls.get_by_file('html', issued, oid)
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def saveAsXML(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        issued = 'issuedLite' if api_lite else 'issued'
+        xml_file = cls.get_by_file('xml', issued, oid)
+        
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(xml_file['Content'].encode('utf-8')))
         return f
 
     @classmethod
