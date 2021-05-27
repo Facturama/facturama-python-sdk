@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '2.1.0'
+__version__ = '3.0.0'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -90,6 +90,7 @@ class Facturama:
             '{}/api/2/'.format(host),
             '{}/api-lite/'.format(host),
             '{}/api-lite/2/'.format(host),
+            '{}/retenciones/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -611,3 +612,90 @@ class csdsMultiEmisor(Facturama):
         :return: object with data from response
         """
         return cls.build_http_request('get', '{}'.format('csds'), version=2)
+
+
+class Retentions(Facturama):
+    """
+    Opr with Cfdi of Facturama API
+    """
+
+    @classmethod
+    def create(cls, data):
+        """        
+        :param data: dict with data for create object
+        :return: object with data from response
+        """
+        return cls.build_http_request('post', '', data, version=4)
+
+    @classmethod
+    def retrieve(cls, oid, params=None):
+        """
+        :params oid: id of object
+        :return: object with data from response
+        """
+        return cls.build_http_request('get', oid, params=params, version=4)        
+
+    @classmethod
+    def get_by_file(cls, format, oid):
+        """
+        :return: get cfdi file by format and type
+        """
+        return cls.build_http_request('get', '{}/{}'.format(oid, format), params=None, version=4)
+
+    @classmethod
+    def saveAsPdf(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('pdf', oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def saveAsHtml(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        html_file = cls.get_by_file('html', oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def saveAsXML(cls, oid, fileName):
+        """
+        :return: get cfdi file by format and type
+        """
+        xml_file = cls.get_by_file('xml', oid)
+        cls.api_lite = True
+        with open(fileName, 'wb') as f:
+            f.write(base64.urlsafe_b64decode(xml_file['Content'].encode('utf-8')))
+        return f
+
+    @classmethod
+    def delete(cls, oid):
+        """
+        :param oid: id object
+        :return: None
+        """
+        return cls.build_http_request(
+            'delete', oid, version=4)
+
+    @classmethod
+    def list(cls, filters = None):
+        """
+        :param filters: dict filters
+        :return: None
+        """
+        return cls.build_http_request('get','', params=filters, version=4)
+    
+    @classmethod
+    def sendByMail(cls, oid, email):
+        """
+        :param filters: dict filters
+        :return: None
+        """        
+        return cls.build_http_request('post','envia?id={}&email={}'.format(oid, email), None, version=4)
