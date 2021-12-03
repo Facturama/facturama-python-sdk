@@ -11,11 +11,12 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.0'
+__version__ = '3.0.1'
 __author__ = 'Raul Granados'
 
 api_lite = False
 sandbox = False
+url_base = ''
 
 _credentials = ('', '')
 
@@ -84,7 +85,11 @@ class Facturama:
         http://api.facturama.mx/api-lite/2/ - opción 3 api-lite and cfdi 2
         """
 
-        host = 'https://apisandbox.facturama.mx' if sandbox else 'https://api.facturama.mx'
+        if url_base:
+            host = url_base
+        else:
+            host = 'https://apisandbox.facturama.mx' if sandbox else 'https://api.facturama.mx'
+            
         uris = [
             '{}/api/'.format(host),
             '{}/api/2/'.format(host),
