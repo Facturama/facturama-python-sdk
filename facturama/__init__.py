@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.1'
+__version__ = '3.0.2'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -89,7 +89,7 @@ class Facturama:
             host = url_base
         else:
             host = 'https://apisandbox.facturama.mx' if sandbox else 'https://api.facturama.mx'
-            
+
         uris = [
             '{}/api/'.format(host),
             '{}/api/2/'.format(host),
@@ -105,8 +105,8 @@ class Facturama:
         )
 
         if body.status_code == 200 or body.status_code == 201 or body.status_code == 204:
-            response_body = {'status': True}                        
-            try:                
+            response_body = {'status': True}
+            try:
                 response_body = body.json()
             except Exception:
                 pass
@@ -256,7 +256,7 @@ class Cfdi(Facturama):
         """
         issued = 'issuedLite' if api_lite else 'issued'
         xml_file = cls.get_by_file('xml', issued, oid)
-        
+
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(xml_file['Content'].encode('utf-8')))
         return f
@@ -269,15 +269,14 @@ class Cfdi(Facturama):
         return cls.build_http_request('post', '{}?cfdiType={}&cfdiId={}&email={}'.format(cls.__name__, t, oid, email))
 
     @classmethod
-    def delete(cls, oid):
+    def delete(cls, oid, _type, _motive, _uuidReplacement=None):
         """
         :param oid: id object
         :return: None
         """
+        params = {'type':_type, 'motive':_motive, 'uuidReplacement':_uuidReplacement }
         v = 2 if api_lite else 0
-        return cls.build_http_request(
-            'delete', '{}/{}'.format(cls.__name__ if not api_lite else 'cfdis', oid), version=v
-        )
+        return cls.build_http_request('delete', '{}/{}'.format(cls.__name__ if not api_lite else 'cfdis', oid),params=params, version=v)
 
     @classmethod
     def list(cls, tipo, keyword, status):
@@ -331,7 +330,7 @@ class csds(Facturama):
             'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
         }
         return cls.build_http_request('post', cls.__name__, data, version=v)
-        
+
 
 class Catalogs(Facturama):
     catalog = None
@@ -507,14 +506,13 @@ class CfdiMultiEmisor(Facturama):
         return f
 
     @classmethod
-    def delete(cls, oid):
+    def delete(cls, oid, _motive, _uuidReplacement=None):
         """
         :param oid: id object
         :return: None
         """
-
-        return cls.build_http_request(
-            'delete', '{}/{}'.format('cfdis', oid), version=3)
+        params = {'motive':_motive, 'uuidReplacement':_uuidReplacement }
+        return cls.build_http_request('delete', '{}/{}'.format('cfdis', oid),params=params, version=2)
 
     @classmethod
     def list(cls, filters):
@@ -550,7 +548,7 @@ class csdsMultiEmisor(Facturama):
     @classmethod
     def create(cls, data):
         raise NotImplemented('Method not implemented')
-    
+
     @classmethod
     def upload(cls, rfc, path_key, path_cer, password, encode=False):
         """
@@ -600,7 +598,7 @@ class csdsMultiEmisor(Facturama):
             'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
         }
         return cls.build_http_request('put', '{}/{}'.format('csds', rfc), data, version=2)
-    
+
 
     @classmethod
     def delete(cls, rfc):
@@ -626,7 +624,7 @@ class Retentions(Facturama):
 
     @classmethod
     def create(cls, data):
-        """        
+        """
         :param data: dict with data for create object
         :return: object with data from response
         """
@@ -638,7 +636,7 @@ class Retentions(Facturama):
         :params oid: id of object
         :return: object with data from response
         """
-        return cls.build_http_request('get', oid, params=params, version=4)        
+        return cls.build_http_request('get', oid, params=params, version=4)
 
     @classmethod
     def get_by_file(cls, format, oid):
@@ -696,11 +694,11 @@ class Retentions(Facturama):
         :return: None
         """
         return cls.build_http_request('get','', params=filters, version=4)
-    
+
     @classmethod
     def sendByMail(cls, oid, email):
         """
         :param filters: dict filters
         :return: None
-        """        
+        """
         return cls.build_http_request('post','envia?id={}&email={}'.format(oid, email), None, version=4)

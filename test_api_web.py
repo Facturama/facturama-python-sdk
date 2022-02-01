@@ -2,16 +2,16 @@ import facturama
 import json
 
 def test_create_cfdi_api_web():
-    print ("=== Create CFDI API Web ===")     
+    print ("=== Create CFDI API Web ===")
     facturama._credentials = ('pruebasapi', 'pruebas2011')
 
     cfdi_object = {
-        "Folio": "100",                
-        "ExpeditionPlace": "78116",      
+        "Folio": "100",
+        "ExpeditionPlace": "78116",
         "PaymentConditions": "CREDITO A SIETE DIAS",
         "CfdiType": "I",
         "PaymentForm": "03",
-        "PaymentMethod": "PUE",        
+        "PaymentMethod": "PUE",
         "Receiver": {
             "Rfc": "XAXX010101000",
             "Name": "Publico en general",
@@ -64,7 +64,7 @@ def test_create_cfdi_api_web():
 
     facturama.api_lite = False    # API Web Mode
     facturama.sandbox = True       # Sandbox environment
-    
+
     cfdiCreated = facturama.Cfdi.create(cfdi_object)
     print ("------ cfdiCreated ------")
     print (cfdiCreated)
@@ -78,7 +78,16 @@ def test_create_cfdi_api_web():
 
     print ("------ xmlFile ------")
     facturama.Cfdi.saveAsXML(cfdiCreated['Id'], cfdiCreated['Id'] + ".xml")
-    
+
+    #delete(IDcfdi,type,motive,uuidReplacement)
+    #type=(issued or payroll)
+    #motive=(01 or 02 or 03 or 04)
+    #uuidReplacement=(UUID or None)
+    print("------ Cancel CFDI ------")
+    cfdiRetrived = facturama.Cfdi.delete(cfdiCreated['Id'], 'issued', '01', '50AD4DD3-8BA1-4A28-BC1B-F7CD61A8F93D')
+    print (cfdiRetrived)
+
+
 
 
 
@@ -87,5 +96,5 @@ def test_create_cfdi_api_web():
 if __name__ == "__main__":
     print ("### Test Facturama API Web ###")
     print("")
-    
+
     test_create_cfdi_api_web()
