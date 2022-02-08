@@ -2,7 +2,7 @@ import facturama
 import json
 
 def test_create_cfdi_multi():
-    print ("=== Create CFDI Multi ===")     
+    print ("=== Create CFDI Multi ===")
     facturama._credentials = ('pruebasapi', 'pruebas2011')
 
     cfdi_object = {
@@ -71,7 +71,7 @@ def test_create_cfdi_multi():
 
     facturama.api_lite = True    # Multi Issuer Mode
     facturama.sandbox = True       # Sandbox environment
-    
+
     cfdiCreated = facturama.CfdiMultiEmisor.create(cfdi_object)
     print ("------ cfdiCreated ------")
     print (cfdiCreated)
@@ -83,17 +83,24 @@ def test_create_cfdi_multi():
     cfdiRetrived = facturama.CfdiMultiEmisor.retrieve(cfdiCreated['Id'])
     print (cfdiRetrived)
 
+    #delete(IDcfdi,type,motive,uuidReplacement)
+    #motive=(01 or 02 or 03 or 04)
+    #uuidReplacement=(UUID or None)
+    print("------ Cancel CFDI Multiemisor------")
+    cfdiRetrived = facturama.CfdiMultiEmisor.delete(cfdiCreated['Id'], '01', '50AD4DD3-8BA1-4A28-BC1B-F7CD61A8F93D')
+    print (cfdiRetrived)
 
 
 
 
-def test_update_csd():    
+
+def test_update_csd():
     facturama._credentials = ('pruebasapi', 'pruebas2011')
     facturama.api_lite = True
-    facturama.sandbox = True    
+    facturama.sandbox = True
     facturama.csdsMultiEmisor.update('EKU9003173C9', 'key.key', 'cert.cer', '12345678a')
-    csd = facturama.csdsMultiEmisor.get_by_rfc('EKU9003173C9')    
-    print (csd.Rfc)    
+    csd = facturama.csdsMultiEmisor.get_by_rfc('EKU9003173C9')
+    print (csd.Rfc)
 
     facturama.csdsMultiEmisor.delete('EKU9003173C9')
 
@@ -101,6 +108,6 @@ def test_update_csd():
 if __name__ == "__main__":
     print ("### Test Facturama API ###")
     print("")
-    
+
     test_create_cfdi_multi()
     #test_update_csd()
