@@ -1,15 +1,13 @@
-# Facturama
+# Facturama Python SDK
+
+[NOTE] This document is also available in [English]
+
 Facturama python wrapper https://api.facturama.mx/
 
 ## Instalación
 ```sh
 pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
 ```
-
-
-
-
-
 
 ## Operaciones Web API
 - Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de estos por mail.
@@ -41,3 +39,5 @@ $ nosetests
 
 ## Contributing:
 [tingsystems](https://github.com/tingsystems)
+
+[English]: ./README-en.md
