@@ -20,11 +20,10 @@ Ejemplos:[aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web)
 
 ## Operaciones API Multiemisor
 
-- Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de
-   estos por mail.
-- Consultar Perfil y Suscripción actual
-- Carga de Logo y Certificados Digitales
-- CRUD de Productos, Clientes, Sucursales y Series.
+- Crear, Consultar, Cancelar descarga de XML
+- CRUD de CSD (Certificados de los Sellos Digitales).
+
+*Las operaciones no se reflejan en la plataforma web.*
 
 Ejemplos:[aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor)
 
