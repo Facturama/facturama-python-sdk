@@ -1,6 +1,6 @@
 # Facturama SDK Python
 
->[NOTA] Este documento esta disponible en [Español]
+>[NOTA] Este documento esta disponible en [Español].
 >
 >Library to consume the Web API and Multiissuer API of [Facturama](https://api.facturama.mx/).
 >
@@ -55,10 +55,10 @@ Some examples: [here](https://github.com/Facturama/facturama-python-sdk/wiki/API
 
 ## Mult-issuer API operations
 
-- Create, get, cancel CFDIs; download XMLs and PDFs;
+- Create, get, cancel CFDIs; download XMLs and PDFs.
 - CRUD for digital sign certificates ("CSD", "Certificados de los Sellos Digitales").
 
-Some examples: [here](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor)
+Some examples: [here](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor).
 
 ## Library Development and Testing
 
