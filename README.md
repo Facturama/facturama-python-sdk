@@ -35,6 +35,8 @@ facturama._credentials = ('username', 'password')
 ## API Web
 
 > Creación de CFDIs con un único emisor, (el propietario de la cuenta, cuyo perfil fiscal se tiene configurado)
+> 
+> *Todas las operaciones son reflejadas en la plataforma web.*
 
 ### Operaciones API Web
 - Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de estos por mail.
@@ -44,12 +46,14 @@ facturama._credentials = ('username', 'password')
 
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web)
 
-*Todas las operaciones son reflejadas en la plataforma web.*
+
 
 
 ## API Multiemisor
 
 > Creacion de CFDIs con multiples emisores.
+>
+> *Las operaciones NO se reflejan en la plataforma web.*
 
 ### Operaciones API Multiemisor
 
@@ -58,7 +62,7 @@ Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web
 
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor)
 
-*Las operaciones no se reflejan en la plataforma web.*
+
 
 
 ### Library Development and Testing
