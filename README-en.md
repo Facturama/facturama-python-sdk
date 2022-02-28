@@ -6,7 +6,7 @@
 >
 >Check the Facturama guide [here](https://apisandbox.facturama.mx/guias).
 
-## create user account
+## Create user account
 
 > Create a user account in [Sandbox](https://dev.facturama.mx/api/login) environment.
 >
