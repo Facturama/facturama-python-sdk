@@ -49,7 +49,7 @@ Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web
 
 ## API Multiemisor
 
-> Creacion de CFDI con multiples emisores
+> Creacion de CFDIs con multiples emisores.
 
 ### Operaciones API Multiemisor
 
