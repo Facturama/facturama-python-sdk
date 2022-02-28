@@ -34,7 +34,7 @@ facturama._credentials = ('username', 'password')
 
 ## Web API 
 
-> Make CFDis by using one issuer.
+> Make CFDIs by using one issuer.
 >
 > *All operations will be reflected on Facturama's web app.*
 
@@ -49,7 +49,7 @@ Some examples: [here](https://github.com/Facturama/facturama-python-sdk/wiki/API
 
 ## Mult-issuer API
 
-> make CFDis by using multiple issuers.
+> make CFDIs by using multiple issuers.
 >
 > *These operations will NOT be reflected on Facturama's web app.*
 
