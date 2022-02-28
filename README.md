@@ -1,6 +1,6 @@
 # Facturama Python SDK
 
-> [NOTE] This document is also available in [English]
+> [NOTE] This document is also available in [English].
 >
 > Librería para consumir la API Web y API Multiemisor de [Facturama](https://api.facturama.mx/).
 >
@@ -10,7 +10,7 @@
 
 > Crear una cuenta de usuario en el ambiente de prueba [Sandbox](https://dev.facturama.mx/api/login) 
 >
-> Para API Web, realiza la configuración básica usando RFC de pruebas **"EKU9003173C9"**, más información [aquí](https://apisandbox.facturama.mx/guias/perfil-fiscal)
+> Para API Web, realiza la configuración básica usando RFC de pruebas **"EKU9003173C9"**, más información [aquí](https://apisandbox.facturama.mx/guias/perfil-fiscal).
 >
 > Sellos digitales de prueba (CSD), [aquí](https://github.com/rafa-dx/facturama-CSD-prueba). 
 
@@ -38,8 +38,8 @@ facturama._credentials = ('username', 'password')
 
 ### Operaciones API Web
 - Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de estos por mail.
-- Consultar Perfil y Suscripción actual
-- Carga de Logo y Certificados Digitales
+- Consultar Perfil y Suscripción actual.
+- Carga de Logo y Certificados Digitales.
 - CRUD de Productos, Clientes, Sucursales y Series.
 
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web)
@@ -53,7 +53,7 @@ Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web
 
 ### Operaciones API Multiemisor
 
-- Crear, Consultar, Cancelar descarga de XML
+- Crear, Consultar, Cancelar descarga de XML.
 - CRUD de CSD (Certificados de los Sellos Digitales).
 
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor)
