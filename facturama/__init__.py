@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.2'
+__version__ = '3.0.3'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -82,6 +82,7 @@ class Facturama:
 
         """
         http://api.facturama.mx/2/ - opción 1 api and cfdi 3.3
+        http://api.facturama.mx/3/ - opción 5 api and cfdi 4.0
         http://api.facturama.mx/api-lite/2/ - opción 3 api-lite and cfdi 2
         """
 
@@ -96,6 +97,7 @@ class Facturama:
             '{}/api-lite/'.format(host),
             '{}/api-lite/2/'.format(host),
             '{}/retenciones/'.format(host),
+            '{}/api/3/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -135,6 +137,15 @@ class Facturama:
 
     @classmethod
     def create(cls, data):
+        """
+
+        :param data: dict with data for create object
+        :return: object with data from response
+        """
+        return cls.build_http_request('post', cls.__name__, data)
+
+    @classmethod
+    def create3(cls, data):
         """
 
         :param data: dict with data for create object
@@ -208,9 +219,21 @@ class Cfdi(Facturama):
     """
     Opr with Cfdi of Facturama API
     """
-
+    #CFDI 3.3 URI v=1
     @classmethod
     def create(cls, data, v=1):
+        """
+
+        :param v: cfdi version 0 api, 1 api and cfdi 3.3, 2 api-lite, 3 api-lite and cfdi 3.3
+        :param data: dict with data for create object
+        :return: object with data from response
+        """
+
+        return cls.build_http_request('post', 'cfdis' , data, version=v)
+
+    # CFDI 4.0 URI v=5
+    @classmethod
+    def create3(cls, data, v=5):
         """
 
         :param v: cfdi version 0 api, 1 api and cfdi 3.3, 2 api-lite, 3 api-lite and cfdi 3.3
