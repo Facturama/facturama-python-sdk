@@ -16,7 +16,7 @@
 
 ### Instalación
 ```sh
-pip install -e git://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
+pip install -e git+https://github.com/Facturama/facturama-python-sdk.git@master#egg=facturama
 ```
 
 ### Incluir librería
