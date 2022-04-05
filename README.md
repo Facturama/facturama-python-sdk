@@ -13,6 +13,7 @@
 > Para API Web, realiza la configuración básica usando RFC de pruebas **"EKU9003173C9"**, más información [aquí](https://apisandbox.facturama.mx/guias/perfil-fiscal).
 >
 > Sellos digitales de prueba (CSD), [aquí](https://github.com/rafa-dx/facturama-CSD-prueba). 
+
 ## Inicio Rápido
 
 ### Instalación
@@ -47,8 +48,6 @@ facturama._credentials = ('username', 'password')
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web)
 
 
-
-
 ## API Multiemisor
 
 > Creacion de CFDIs con multiples emisores.
@@ -61,8 +60,6 @@ Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web
 - CRUD de CSD (Certificados de los Sellos Digitales).
 
 Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Multiemisor)
-
-
 
 
 ### Library Development and Testing
