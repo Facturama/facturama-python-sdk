@@ -5,6 +5,7 @@
 > Librería para consumir la API Web y API Multiemisor de [Facturama](https://api.facturama.mx/).
 >
 > Puedes consultar la guía completa de la [API](https://apisandbox.facturama.mx/guias).
+
 ## Crear cuenta de usuario
 
 > Crear una cuenta de usuario en el ambiente de prueba [Sandbox](https://dev.facturama.mx/api/login) 
@@ -30,11 +31,13 @@ import facturama
 ```sh
 facturama._credentials = ('username', 'password')
 ```
+
 ## API Web
 
 > Creación de CFDIs con un único emisor, (el propietario de la cuenta, cuyo perfil fiscal se tiene configurado)
 > 
 > *Todas las operaciones son reflejadas en la plataforma web.*
+
 ### Operaciones API Web
 - Crear, Consultar Cancelar CFDI así como descargar XML, PDF y envió de estos por mail.
 - Consultar Perfil y Suscripción actual.
@@ -51,6 +54,7 @@ Ejemplos: [aquí](https://github.com/Facturama/facturama-python-sdk/wiki/API-Web
 > Creacion de CFDIs con multiples emisores.
 >
 > *Las operaciones NO se reflejan en la plataforma web.*
+
 ### Operaciones API Multiemisor
 
 - Crear, Consultar, Cancelar descarga de XML.
