@@ -12,24 +12,26 @@ class BaseEndpointTestCase(unittest.TestCase):
     customer_object = {
         "Id": "1111000",
         "Email": "test@test.com",
-        "Address": {
-            "Street": "Fenix One",
-            "ExteriorNumber": "1",
-            "InteriorNumber": "0",
-            "Neighborhood": "Call me",
-            "ZipCode": "59510",
-            "Locality": "Xiquilpan",
-            "Municipality": "Jiquilpan",
-            "State": "MICHOACAN DE OCAMPO",
-            "Country": "MX"
-        },
-        "Rfc": "GARR900630G98",
-        "Name": "Pollitux",
+        "EmailOp1": "",
+        "EmailOp2": "",
+        "Rfc": "CACX7605101P8",
+        "Name": "RXOCHILT CASAS CHAVEZ",
         "CfdiUse": "P01",
-        "TaxResidence": "",
-        "NumRegIdTrib": ""
+        "TaxResidence": "10740",
+        "FiscalRegime":"605",
+        "NumRegIdTrib": "",
+        "Address": {
+            "Street": "Calle de pruebas",
+            "ExteriorNumber": "123",
+            "InteriorNumber": "456",
+            "Neighborhood": "Santa Teresa",
+            "ZipCode": "10740",
+            "Locality": "Ciudad de México",
+            "Municipality": "La Magdalena Contreras",
+            "State": "Distrito Federal",
+            "Country": "Mex"
+        }
     }
-
 
     product_object = {
       "Unit": "Servicio",
@@ -61,6 +63,7 @@ class BaseEndpointTestCase(unittest.TestCase):
         }
       ]
     }
+    
     branch_office_object = {
         "Name": "Corp Inc",
         "Description": "Desc corp",
@@ -77,26 +80,21 @@ class BaseEndpointTestCase(unittest.TestCase):
         },
     }
 
-
-
     cfdi_object ={
         "Folio": "100",
-        "Serie": "R",
+        "Serie": "B",
         "Currency": "MXN",
-        "ExpeditionPlace": "78116",
+        "ExpeditionPlace": "78140",
         "PaymentConditions": "CREDITO A SIETE DIAS",
         "CfdiType": "I",
         "PaymentForm": "03",
         "PaymentMethod": "PUE",
-        "Issuer": {
-            "FiscalRegime": "601",
-            "Rfc": "ESO1202108R2",
-            "Name": "SinDelantal Mexico"
-        },
         "Receiver": {
-            "Rfc": "XAXX010101000",
-            "Name": "RADIAL SOFTWARE SOLUTIONS",
-            "CfdiUse": "P01"
+            "Rfc": "URE180429TM6",
+            "Name": "UNIVERSIDAD ROBOTICA ESPAÑOLA",
+            "CfdiUse": "G03",
+            "FiscalRegime": "601",
+            "TaxZipCode": "65000"
         },
         "Items": [
             {
@@ -108,6 +106,7 @@ class BaseEndpointTestCase(unittest.TestCase):
                 "UnitPrice": 50.0,
                 "Quantity": 2.0,
                 "Subtotal": 100.0,
+                "TaxObject":"02",
                 "Taxes": [
                     {
                         "Total": 16.0,
@@ -129,6 +128,260 @@ class BaseEndpointTestCase(unittest.TestCase):
                 "Quantity": 15.0,
                 "Subtotal": 1500.0,
                 "Discount": 0.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 240.0,
+                        "Name": "IVA",
+                        "Base": 1500.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 1740.0
+            }
+        ]
+    }
+
+    cfdi_object_40 ={
+        "Folio": "100",
+        "Serie": "B",
+        "Currency": "MXN",
+        "ExpeditionPlace": "78140",
+        "PaymentConditions": "CREDITO A SIETE DIAS",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Receiver": {
+            "Rfc": "URE180429TM6",
+            "Name": "UNIVERSIDAD ROBOTICA ESPAÑOLA",
+            "CfdiUse": "CP01",
+            "FiscalRegime": "601",
+            "TaxZipCode": "65000"
+        },
+        "Items": [
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
+                "Quantity": 2.0,
+                "Subtotal": 100.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            },
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "001",
+                "Description": "SERVICIO DE COLOCACION",
+                "Unit": "NO APLICA",
+                "UnitCode": "E49",
+                "UnitPrice": 100.0,
+                "Quantity": 15.0,
+                "Subtotal": 1500.0,
+                "Discount": 0.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 240.0,
+                        "Name": "IVA",
+                        "Base": 1500.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 1740.0
+            }
+        ]
+    }
+
+    cfdi_object_40_mult ={
+        "Folio": "100",
+        "Serie": "B",
+        "Currency": "MXN",
+        "ExpeditionPlace": "78140",
+        "PaymentConditions": "CREDITO A SIETE DIAS",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Issuer": {
+            "Rfc":"EKU9003173C9",
+            "Name":"ESCUELA KEMPER URGATE",
+            "CfdiUse":"G03",
+            "FiscalRegime":"601"
+        },
+        "Receiver": {
+            "Rfc": "URE180429TM6",
+            "Name": "UNIVERSIDAD ROBOTICA ESPAÑOLA",
+            "CfdiUse": "CP01",
+            "FiscalRegime": "601",
+            "TaxZipCode": "65000"
+        },
+        "Items": [
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
+                "Quantity": 2.0,
+                "Subtotal": 100.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            },
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "001",
+                "Description": "SERVICIO DE COLOCACION",
+                "Unit": "NO APLICA",
+                "UnitCode": "E49",
+                "UnitPrice": 100.0,
+                "Quantity": 15.0,
+                "Subtotal": 1500.0,
+                "Discount": 0.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 240.0,
+                        "Name": "IVA",
+                        "Base": 1500.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 1740.0
+            }
+        ]
+    }
+  
+    cfdi_object_FacturaGlobal ={
+        "Folio": "100",
+        "Serie": "B",
+        "Currency": "MXN",
+        "ExpeditionPlace": "78140",
+        "PaymentConditions": "CFDI 4.0 de prueba ",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Exportation":"01",
+        "GlobalInformation":{ 
+            "Periodicity":"04",
+            "Months":"04",
+            "Year":"2022"
+        },
+        "Receiver": {
+            "Rfc": "XAXX010101000",
+            "Name": "PUBLICO EN GENERAL",
+            "CfdiUse": "S01",
+            "TaxZipCode": "78140",
+            "FiscalRegime":"616"
+        },
+        "Items": [
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
+                "Quantity": 2.0,
+                "Subtotal": 100.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            }
+        ]
+    }
+
+    cfdi_object_FacturaGlobal_mult ={
+        "Folio": "100",
+        "Serie": "B",
+        "Currency": "MXN",
+        "ExpeditionPlace": "78140",
+        "PaymentConditions": "CFDI 4.0 de prueba ",
+        "CfdiType": "I",
+        "PaymentForm": "03",
+        "PaymentMethod": "PUE",
+        "Exportation":"01",
+        "GlobalInformation":{ 
+            "Periodicity":"04",
+            "Months":"04",
+            "Year":"2022"
+        },
+        "Issuer": {
+            "Rfc": "EKU9003173C9",
+            "Name": "ESCUELA KEMPER URGATE",
+            "FiscalRegime": "601"
+        },
+        "Receiver": {
+            "Rfc": "XAXX010101000",
+            "Name": "PUBLICO EN GENERAL",
+            "CfdiUse": "S01",
+            "TaxZipCode": "78140",
+            "FiscalRegime":"616"
+        },
+        "Items": [
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "EDL",
+                "Description": "Estudios de viabilidad",
+                "Unit": "NO APLICA",
+                "UnitCode": "MTS",
+                "UnitPrice": 50.0,
+                "Quantity": 2.0,
+                "Subtotal": 100.0,
+                "TaxObject":"02",
+                "Taxes": [
+                    {
+                        "Total": 16.0,
+                        "Name": "IVA",
+                        "Base": 100.0,
+                        "Rate": 0.16,
+                        "IsRetention": False
+                    }
+                ],
+                "Total": 116.0
+            },
+            {
+                "ProductCode": "10101504",
+                "IdentificationNumber": "001",
+                "Description": "SERVICIO DE COLOCACION",
+                "Unit": "NO APLICA",
+                "UnitCode": "E49",
+                "UnitPrice": 100.0,
+                "Quantity": 15.0,
+                "Subtotal": 1500.0,
+                "Discount": 0.0,
+                "TaxObject":"02",
                 "Taxes": [
                     {
                         "Total": 240.0,
