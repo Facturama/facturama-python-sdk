@@ -4,7 +4,7 @@ import json
 #Test CFDI 3.3
 def test_create_cfdi_api_web():
     print ("=== Create CFDI API Web ===")
-    facturama._credentials = ('pruebasapi', 'pruebas2011')
+    facturama._credentials = ('sdkpruebas', 'pruebas2022')
 
     cfdi_object = {
         "Folio": "100",
@@ -14,9 +14,11 @@ def test_create_cfdi_api_web():
         "PaymentForm": "03",
         "PaymentMethod": "PUE",
         "Receiver": {
-            "Rfc": "XAXX010101000",
-            "Name": "Publico en general",
-            "CfdiUse": "P01"
+            "Rfc": "URE180429TM6",
+            "Name": "UNIVERSIDAD ROBOTICA ESPAÑOLA",
+            "CfdiUse": "G03",
+            "FiscalRegime": "601",
+            "TaxZipCode": "65000"
         },
         "Items": [
             {
@@ -28,6 +30,7 @@ def test_create_cfdi_api_web():
                 "UnitPrice": 50.0,
                 "Quantity": 2.0,
                 "Subtotal": 100.0,
+                "TaxObject":"02",
                 "Taxes": [
                     {
                         "Total": 16.0,
@@ -49,6 +52,7 @@ def test_create_cfdi_api_web():
                 "Quantity": 15.0,
                 "Subtotal": 1500.0,
                 "Discount": 0.0,
+                "TaxObject":"02",
                 "Taxes": [
                     {
                         "Total": 240.0,
@@ -67,18 +71,18 @@ def test_create_cfdi_api_web():
     facturama.sandbox = True       # Sandbox environment
 
     cfdiCreated = facturama.Cfdi.create(cfdi_object)
-    print ("------ cfdiCreated ------")
-    print (cfdiCreated)
+    #print ("------ cfdiCreated ------")
+    #print (cfdiCreated)
 
     print ("------ Id to Retrieve ------")
     print(cfdiCreated['Id'])
 
-    print ("------ cfdiRetrieved ------")
-    cfdiRetrived = facturama.Cfdi.retrieve(cfdiCreated['Id'])
-    print (cfdiRetrived)
+    #print ("------ cfdiRetrieved ------")
+    #cfdiRetrived = facturama.Cfdi.retrieve(cfdiCreated['Id'])
+    #print (cfdiRetrived)
 
-    print ("------ xmlFile ------")
-    facturama.Cfdi.saveAsXML(cfdiCreated['Id'], cfdiCreated['Id'] + ".xml")
+    #print ("------ xmlFile ------")
+    #facturama.Cfdi.saveAsXML(cfdiCreated['Id'], cfdiCreated['Id'] + ".xml")
 
     #delete(IDcfdi,type,motive,uuidReplacement)
     #type=(issued or payroll)
@@ -91,7 +95,7 @@ def test_create_cfdi_api_web():
 # Test CFDI 4.0
 def test_create_cfdi4_api_web():
     print ("=== Create CFDI 4.0 API Web ===")
-    facturama._credentials = ('pruebasapi', 'pruebas2011')
+    facturama._credentials = ('sdkpruebas', 'pruebas2022')
 
     cfdi4_object = {
         "Folio": "100",
@@ -103,7 +107,7 @@ def test_create_cfdi4_api_web():
         "Receiver": {
             "Rfc": "EKU9003173C9",
             "Name": "ESCUELA KEMPER URGATE",
-            "CfdiUse": "P01",
+            "CfdiUse": "G03",
             "FiscalRegime":"603",
             "TaxZipCode":"26015"
         },
@@ -117,7 +121,7 @@ def test_create_cfdi4_api_web():
                 "UnitPrice": 50.0,
                 "Quantity": 2.0,
                 "Subtotal": 100.0,
-                "ObjetoImp":"02",
+                "TaxObject":"02",
                 "Taxes": [
                     {
                         "Total": 16.0,

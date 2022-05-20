@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.3'
+__version__ = '3.0.4'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -98,6 +98,7 @@ class Facturama:
             '{}/api-lite/2/'.format(host),
             '{}/retenciones/'.format(host),
             '{}/api/3/'.format(host),
+            '{}/api-lite/3/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -477,6 +478,18 @@ class CfdiMultiEmisor(Facturama):
         :return: object with data from response
         """
         return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
+
+    #CFDI 4.0 Multiemisor
+    @classmethod
+    def create3(cls, data, v=6):
+        """
+
+        :param v: 6 for /api-lite/3/
+        :param data: dict with data for create object
+        :return: object with data from response
+        """
+        return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
+
 
     @classmethod
     def retrieve(cls, oid, params=None):
