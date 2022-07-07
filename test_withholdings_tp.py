@@ -6,7 +6,7 @@ import json
 
 def test_create_retention():
     print ("=== Create technology platforms withholdings ===")     
-    facturama._credentials = ('pruebasapi', 'pruebas2011')
+    facturama._credentials = ('pruebas', 'pruebas2011')
 
     cfdi_object = {
         "FolioInt": "216647",

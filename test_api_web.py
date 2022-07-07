@@ -4,7 +4,7 @@ import json
 #Test CFDI 3.3
 def test_create_cfdi_api_web():
     print ("=== Create CFDI API Web ===")
-    facturama._credentials = ('sdkpruebas', 'pruebas2022')
+    facturama._credentials = ('pruebas', 'pruebas2011')
 
     cfdi_object = {
         "Folio": "100",
@@ -95,7 +95,7 @@ def test_create_cfdi_api_web():
 # Test CFDI 4.0
 def test_create_cfdi4_api_web():
     print ("=== Create CFDI 4.0 API Web ===")
-    facturama._credentials = ('sdkpruebas', 'pruebas2022')
+    facturama._credentials = ('pruebas', 'pruebas2011')
 
     cfdi4_object = {
         "Folio": "100",
@@ -173,6 +173,77 @@ def test_create_cfdi4_api_web():
     #cfdiRetrived = facturama.Cfdi.delete(cfdiCreated['Id'], 'issued', '02', '50AD4DD3-8BA1-4A28-BC1B-F7CD61A8F93D')
     #print (cfdiRetrived)
 
+def test_catalog():
+    print ("=== Test Catalog ===")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    
+    facturama.api_lite = False    # Multi Issuer Mode
+    facturama.sandbox = True       # Sandbox environment
+
+    #Codigos postales
+    #cfdiPostalCode=facturama.PostalCodesCatalog.query({'keyword':'78140'})
+    #print(cfdiPostalCode)
+
+    #ContractTypes
+    #lst_payment=facturama.ContractTypes.query()
+    #print(lst_payment)
+
+    #RegimenTypes
+    #lst_regimentypes=facturama.RegimenTypes.query()
+    #print(lst_regimentypes)
+
+    #TypesOfJourney
+    #lst_typesofjourney=facturama.TypesOfJourney.query()
+    #print(lst_typesofjourney)
+
+    #PositionRisks
+    #lst_positionrisks=facturama.PositionRisks.query()
+    #print(lst_positionrisks)
+
+    #paymentfrequencies
+    #lst_paymentfrequencies=facturama.PaymentFrequencies.query()
+    #print(lst_paymentfrequencies)
+
+    #Banks
+    #lst_Banks=facturama.Banks.query()
+    #print(lst_Banks)
+
+    #Countri 
+    #lst_Countri=facturama.CountriesCatalog.query()
+    #print(lst_Countri)
+
+    #Catalogo Incapacidades
+    #lst_Incapacities=facturama.IncapacitiesCatalog.query()
+    #print(lst_Incapacities)
+
+    #Perceptions
+    #lst_Perceptions=facturama.Perceptions.query()
+    #print(lst_Perceptions)
+
+    #Deductions
+    #lst_Deductions=facturama.Deductions.query()
+    #print(lst_Deductions)
+
+    #OtherPayments
+    #lst_OtherPayments=facturama.OtherPayments.query()
+    #print(lst_OtherPayments)
+
+    #Originsources Catalog
+    #lst_Originsources=facturama.OriginSourcesCatalog.query()
+    #print(lst_Originsources)
+
+    #ExtraHours
+    #lst_ExtraHours=facturama.ExtraHours.query()
+    #print(lst_ExtraHours)
+    
+    #Incapacities
+    #lst_Incapacities=facturama.Incapacities.query()
+    #print(lst_Incapacities)
+
+    
+    #Deductions Catalog
+    #lst_Deductions=facturama.DeductionsCatalog.query()
+    #print(lst_Deductions)
 
 
 
@@ -182,4 +253,5 @@ if __name__ == "__main__":
     print("")
 
     #test_create_cfdi_api_web()# CFDI 3.3
-    test_create_cfdi4_api_web()# CFDI 4.0 test
+    #test_create_cfdi4_api_web()# CFDI 4.0 test
+    #test_catalog()

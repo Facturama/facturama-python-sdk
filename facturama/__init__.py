@@ -61,6 +61,8 @@ class Facturama:
     @classmethod
     def aut_api(cls):
         _username, _password = _credentials
+        if not _username or not _password:
+            raise FacturamaError('Username or password are not set')
         cls._headers = {
             'Authorization': 'Basic %s' % (base64.b64encode(
                 ('{}:{}'.format(_username, _password)).encode('utf-8'))).decode('ascii'),
@@ -369,35 +371,114 @@ class Catalogs(Facturama):
         return cls.build_http_request('get', '{}/{}'.format(cls.prefix, cls.catalog), params=params)
 
 
+class OriginSourcesCatalog(Catalogs):
+    """
+    Opr with originsources catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'originsources'
+
+class DeductionsCatalog(Catalogs):
+    """
+    Opr with deductions catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'deductions'
+
+class Incapacities(Catalogs):
+    """
+    Opr with incapacities catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'incapacities'
+
+class ExtraHours(Catalogs):
+    """
+    Opr with extrahours catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'extrahours'
 class ProductsServicesCatalog(Catalogs):
     """
     Opr with Product or Services catalog of Facturama API
     """
-
+    prefix = 'catalogs'
     catalog = 'ProductsOrServices'
+class ContractTypes(Catalogs):
+    """
+    Opr with ContractTypes catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'ContractTypes'
 
+class Banks(Catalogs):
+    """
+    Opr with banks catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'banks'
+class Perceptions(Catalogs):
+    """
+    Opr with perceptions catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'perceptions'
+class Deductions(Catalogs):
+    """
+    Opr with deductions catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'deductions'
+class OtherPayments(Catalogs):
+    """
+    Opr with otherpayments catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'otherpayments'
+class TypesOfJourney(Catalogs):
+    """
+    Opr with typesofjourney catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'typesofjourney'
+class PositionRisks(Catalogs):
+    """
+    Opr with positionrisks catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'positionrisks'
+class PaymentFrequencies(Catalogs):
+    """
+    Opr with paymentfrequencies catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'paymentfrequencies'
 
+class RegimenTypes(Catalogs):
+    """
+    Opr with regimentypes catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'regimentypes'
 class PostalCodesCatalog(Catalogs):
     """
     Opr with PostalCodes catalog of Facturama API
     """
-
+    prefix = 'catalogs'
     catalog = 'PostalCodes'
-
 
 class UnitsCatalog(Catalogs):
     """
     Opr with Units catalog of Facturama API
     """
-
+    prefix = 'catalogs'
     catalog = 'Units'
-
 
 class CurrenciesCatalog(Catalogs):
     """
     Opr with Currencies catalog of Facturama API
     """
-
+    prefix = 'catalogs'
     catalog = 'Currencies'
 
 
