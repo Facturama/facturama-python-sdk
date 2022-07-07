@@ -3,19 +3,19 @@ from . import BaseEndpointTestCase
 
 class CSDSMultiEndpointTestCase(BaseEndpointTestCase):
     def test_csds(self):
-        self.client._credentials = ('sdkpruebas', 'pruebas2022')
+        self.client._credentials = ('pruebas', 'pruebas2011')
         self.client.sandbox = True
         csd = self.client.csdsMultiEmisor.get_by_rfc('UN-RFC')
         assert csd.status
 
     def getCurrentCsds(self):
-        self.client._credentials = ('sdkpruebas', 'pruebas2022')
+        self.client._credentials = ('pruebas', 'pruebas2011')
         self.client.sandbox = True
         currentCsds = self.client.csdsMultiEmisor.get()
         assert currentCsds
 
     def test_csds_full(self){
-        self.client._credentials = ('sdkpruebas', 'pruebas2022')
+        self.client._credentials = ('pruebas', 'pruebas2011')
 
         self.client.api_lite = True
         self.client.sandbox = True    
