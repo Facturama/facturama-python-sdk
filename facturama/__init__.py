@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.4'
+__version__ = '3.0.5'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -205,11 +205,34 @@ class Client(Facturama):
     Opr with Clients of Facturama API
     """
 
+    @classmethod
+    def list(cls, start, length, search):
+        """
+        :param start: initial search index 
+        :param lenght: Size of records displayed (1-100)
+        :param search: keyword ()
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?start={}&length={}&search={}'.format('Clients' , start, length, search), version=v
+        )
+
 
 class Product(Facturama):
     """
     Opr with Products of Facturama API
     """
+    @classmethod
+    def list(cls, start, length, search):
+        """
+        :param start: initial search index 
+        :param lenght: Size of records displayed (1-100)
+        :param search: keyword ()
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?start={}&length={}&search={}'.format('Products' , start, length, search), version=v
+        )
 
 
 class BranchOffice(Facturama):

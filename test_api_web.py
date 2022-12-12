@@ -180,6 +180,31 @@ def test_catalog():
     facturama.api_lite = False    # Multi Issuer Mode
     facturama.sandbox = True       # Sandbox environment
 
+    #lst_client=facturama.Client.all()
+    #print(lst_client[99])
+
+    #ListarProductosPaginado
+    #lst_product=facturama.Product.list(0,100,"")
+    #Total de registros
+    #print(lst_product["recordsTotal"])
+    #Total de registros filtrados
+    #print(lst_product["recordsFiltered"])
+    #Muestra el contenido del registro '0'
+    #print(lst_product["data"][1])
+    #muestra el ID del del registro '0'
+    #print(lst_product["data"][0]['Id'])
+
+    #ListarClientesPaginado
+    #lst_clients=facturama.Client.list(0,100,"")
+    #Total de registros
+    #print(lst_clients["recordsTotal"])
+    #Total de registros filtrados
+    #print(lst_clients["recordsFiltered"])
+    #Muestra el contenido del registro '0'
+    #print(lst_clients["data"][0])
+    #muestra el ID del del registro '0'
+    #print(lst_clients["data"][0]['Id'])
+
     #Codigos postales
     #cfdiPostalCode=facturama.PostalCodesCatalog.query({'keyword':'78140'})
     #print(cfdiPostalCode)
@@ -254,4 +279,4 @@ if __name__ == "__main__":
 
     #test_create_cfdi_api_web()# CFDI 3.3
     #test_create_cfdi4_api_web()# CFDI 4.0 test
-    #test_catalog()
+    test_catalog()
