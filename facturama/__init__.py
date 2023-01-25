@@ -101,6 +101,7 @@ class Facturama:
             '{}/retenciones/'.format(host),
             '{}/api/3/'.format(host),
             '{}/api-lite/3/'.format(host),
+            '{}/2/retenciones/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -337,6 +338,37 @@ class Cfdi(Facturama):
         return cls.build_http_request(
             'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, keyword, status), version=v
         )
+
+    @classmethod
+    def listByRfc(cls, tipo, status, rfc):
+        """
+        :return: None
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, status, rfc), version=v
+        )
+
+    @classmethod
+    def listAll(cls, tipo='issued', folioStart=-1, folioEnd=-1, rfc='', dateStart='', dateEnd='', status='all', orderNumber='', page=0):
+        """
+        :return: None
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?type={}&folioStart={}&folioEnd={}&rfc={}&dateStart={}&dateEnd={}&status={}&orderNumber={}&page={}'.format(cls.__name__ , tipo, folioStart, folioEnd,rfc,dateStart,dateEnd,status,orderNumber,page), version=v
+        )
+    
+    @classmethod
+    def listById(cls, oid, tipe):
+        """
+        :return: None
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}/{}?type={}'.format(cls.__name__ , oid, tipe), version=v
+        )
+    
 
 class csds(Facturama):
     """
