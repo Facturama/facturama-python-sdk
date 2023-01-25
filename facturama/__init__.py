@@ -350,13 +350,13 @@ class Cfdi(Facturama):
         )
 
     @classmethod
-    def listAll(cls, tipo='issued', folioStart=-1, folioEnd=-1, rfc='', dateStart='', dateEnd='', status='all', orderNumber='', page=0):
+    def listAll(cls, tipo='issued', folioStart=-1, folioEnd=-1, dateStart='', dateEnd='', rfc='', status='all', orderNumber='', page=0):
         """
         :return: None
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&folioStart={}&folioEnd={}&rfc={}&dateStart={}&dateEnd={}&status={}&orderNumber={}&page={}'.format(cls.__name__ , tipo, folioStart, folioEnd,rfc,dateStart,dateEnd,status,orderNumber,page), version=v
+            'get', '{}?type={}&folioStart={}&folioEnd={}&dateStart={}&dateEnd={}&rfc={}&status={}&orderNumber={}&page={}'.format(cls.__name__ , tipo, folioStart, folioEnd,rfc,dateStart,dateEnd,status,orderNumber,page), version=v
         )
     
     @classmethod
