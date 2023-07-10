@@ -281,6 +281,18 @@ def test_list():
     print(facturama.Cfdi.listAll('issuedLite', None, None, '', '', '', 'all', '', '0'))
     #print(facturama.Cfdi.listById('ejS5fM9j8Yv6U0dfEctY2g2','issued'))
 
+def test_validar():
+    print("Validar Cliente")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = True  # Sandbox environment    
+    params={
+        "Rfc": "EKU9003173C9",
+        "Name": "ESCUELA KEMPER URGATE",
+        "ZipCode":"26015",
+        "FiscalRegime": "601"      
+    }
+    print(facturama.Customers.validate(params))
 
 if __name__ == "__main__":
     print("### Test Facturama API Web ###")
@@ -289,3 +301,4 @@ if __name__ == "__main__":
     # test_create_cfdi4_api_web()# CFDI 4.0 test
     # test_catalog()
     #test_list()
+    #test_validar()
