@@ -241,6 +241,16 @@ class BranchOffice(Facturama):
     Opr with Branch Offices of Facturama API
     """
 
+class Customers(Facturama):
+
+    @classmethod
+    def validate(cls, params=None):
+        """
+        Return: object with data.
+        """
+        v = 0
+        return cls.build_http_request('post', '{}/{}'.format(cls.__name__,'validate'), params, version=v)
+        
 
 class Cfdi(Facturama):
     """
