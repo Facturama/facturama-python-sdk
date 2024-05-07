@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "facturama"
+version = "2.0.5"
+description = "Easy Facturama python wrapper"
+readme = "README.md"
+authors = [{ name = "Tingsystems", email = "soporte@tingsystems.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "License :: OSI Approved :: MIT License",
+]
+keywords = ["facturama", "wrapper"]
+dependencies = [
+    "requests",
+    "simplejson",
+    "nose",
+]
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://github.com/tingsystems/facturama"
