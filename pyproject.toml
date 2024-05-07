@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "facturama"
-version = "2.0.5"
+version = "2.0.5.1"
 description = "Easy Facturama python wrapper"
 readme = "README.md"
 authors = [{ name = "Tingsystems", email = "soporte@tingsystems.com" }]
@@ -24,7 +24,7 @@ dependencies = [
     "simplejson",
     "nose",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 
 [project.urls]
 Homepage = "https://github.com/tingsystems/facturama"
