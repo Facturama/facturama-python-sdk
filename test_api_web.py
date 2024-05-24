@@ -294,6 +294,22 @@ def test_validar():
     }
     print(facturama.Customers.validate(params))
 
+def test_status():
+    print("Validar Cliente")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = True  # Sandbox environment 
+    print(facturama.Cfdi.status("b48171b9-e4cd-4a10-96d8-0be5dc4b9191", "EKU9003173C9", "EKU9003173C9", 11133.35))  
+
+def test_getAcuse():
+    print("Obtener acuse")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = True  # Sandbox environment 
+    print(facturama.acuse.saveAsPdf("51ynX1RzyrxQVwm-Ie59EQ2", "issued"))
+
+
+
 if __name__ == "__main__":
     print("### Test Facturama API Web ###")
     print("")
@@ -302,3 +318,5 @@ if __name__ == "__main__":
     # test_catalog()
     #test_list()
     #test_validar()
+    #test_getAcuse()
+

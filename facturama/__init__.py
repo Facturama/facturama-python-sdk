@@ -11,7 +11,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.5'
+__version__ = '3.0.6'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -66,7 +66,8 @@ class Facturama:
         cls._headers = {
             'Authorization': 'Basic %s' % (base64.b64encode(
                 ('{}:{}'.format(_username, _password)).encode('utf-8'))).decode('ascii'),
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'User-Agent': _username
         }
 
     @classmethod
@@ -102,6 +103,7 @@ class Facturama:
             '{}/api/3/'.format(host),
             '{}/api-lite/3/'.format(host),
             '{}/2/retenciones/'.format(host),
+            '{}/cfdi/status/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -199,7 +201,10 @@ class Facturama:
         :return: None
         """
         return cls.build_http_request('delete', '{}/{}'.format(cls.__name__, oid))
+    @classmethod
+    def status(cls, uuid, issuer, receiver, total, v=8):
 
+        return cls.build_http_request('get', '?uuid={}&issuerRfc={}&receiverRfc={}&total={}'.format(uuid, issuer, receiver, total), version = v)
 
 class Client(Facturama):
     """
@@ -379,6 +384,18 @@ class Cfdi(Facturama):
             'get', '{}/{}?type={}'.format(cls.__name__ , oid, tipe), version=v
         )
     
+class acuse(Facturama):
+
+    @classmethod
+    def saveAsPdf(cls, oid, tipo="issued"):
+        """
+        :return: object with data from response
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}/pdf/{}/{}'.format(cls.__name__ , tipo, oid), version=v)
+
+
 
 class csds(Facturama):
     """

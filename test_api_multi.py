@@ -327,11 +327,11 @@ def test_update_csd():
     facturama._credentials = ('pruebas', 'pruebas2011')
     facturama.api_lite = True
     facturama.sandbox = True
-    facturama.csdsMultiEmisor.upload('EKU9003173C9', 'key.key', 'cert.cer', '12345678a')
-    csd = facturama.csdsMultiEmisor.get_by_rfc('EKU9003173C9')
+    facturama.csdsMultiEmisor.upload('RFC', 'csd.key', 'CSD.cer', 'pass')
+    csd = facturama.csdsMultiEmisor.get_by_rfc('RFC')
     print (csd.Rfc)
 
-    facturama.csdsMultiEmisor.delete('EKU9003173C9')
+    #facturama.csdsMultiEmisor.delete('EKU9003173C9')
 
 
 if __name__ == "__main__":
