@@ -10,22 +10,21 @@ class BaseEndpointTestCase(unittest.TestCase):
     client = facturama
 
     customer_object = {
-        "Id": "1111000",
+        "Id": "",
         "Email": "test@test.com",
         "EmailOp1": "",
         "EmailOp2": "",
         "Rfc": "CACX7605101P8",
-        "Name": "RXOCHILT CASAS CHAVEZ",
-        "CfdiUse": "P01",
-        "TaxResidence": "10740",
+        "Name": "XOCHILT CASAS CHAVEZ",
+        "CfdiUse": "S01",
+        "TaxZipCode": "36257",
         "FiscalRegime":"605",
-        "NumRegIdTrib": "",
         "Address": {
             "Street": "Calle de pruebas",
             "ExteriorNumber": "123",
             "InteriorNumber": "456",
             "Neighborhood": "Santa Teresa",
-            "ZipCode": "10740",
+            "ZipCode": "36257",
             "Locality": "Ciudad de México",
             "Municipality": "La Magdalena Contreras",
             "State": "Distrito Federal",
