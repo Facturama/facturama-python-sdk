@@ -222,8 +222,16 @@ class Client(Facturama):
         return cls.build_http_request(
             'get', '{}?start={}&length={}&search={}'.format('Clients' , start, length, search), version=v
         )
-
-
+    @classmethod
+    def listByRfc(cls, rfc):
+        """
+        :return: object with data
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?keyword={}'.format(cls.__name__ , rfc), version=v
+        )
+    
 class Product(Facturama):
     """
     Opr with Products of Facturama API
