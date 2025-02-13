@@ -165,8 +165,8 @@ class Facturama:
         :params oid: id of object retrieve
         :return: object with data from response
         """
-        params = {'type':'issued'}
-        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None , params=params)
+        params = {'type': 'issued'}
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None, params=params)
 
     @classmethod
     def all(cls, params=None):
@@ -216,8 +216,9 @@ class Client(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Clients' , start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Clients', start, length, search), version=v
         )
+
     @classmethod
     def listByRfc(cls, rfc):
         """
@@ -225,13 +226,15 @@ class Client(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?keyword={}'.format(cls.__name__ , rfc), version=v
+            'get', '{}?keyword={}'.format(cls.__name__, rfc), version=v
         )
+
 
 class Product(Facturama):
     """
     Opr with Products of Facturama API
     """
+
     @classmethod
     def list(cls, start, length, search):
         """
@@ -241,7 +244,7 @@ class Product(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Products' , start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Products', start, length, search), version=v
         )
 
 
@@ -249,6 +252,7 @@ class BranchOffice(Facturama):
     """
     Opr with Branch Offices of Facturama API
     """
+
 
 class Customers(Facturama):
 
@@ -258,7 +262,7 @@ class Customers(Facturama):
         Return: object with data.
         """
         v = 0
-        return cls.build_http_request('post', '{}/{}'.format(cls.__name__,'validate'), params, version=v)
+        return cls.build_http_request('post', '{}/{}'.format(cls.__name__, 'validate'), params, version=v)
 
 
 class Cfdi(Facturama):
@@ -357,7 +361,7 @@ class Cfdi(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, keyword, status), version=v
+            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__, tipo, keyword, status), version=v
         )
 
     @classmethod
@@ -392,6 +396,17 @@ class Cfdi(Facturama):
         return cls.build_http_request(
             'get', '{}/{}?type={}'.format(cls.__name__, oid, tipe), version=v
         )
+
+
+class acuse(Facturama):
+
+    @classmethod
+    def saveAsPdf(cls, oid, tipo="issued"):
+        """
+        :return: object with data from response
+        """
+        v = 0
+        return cls.build_http_request('get', '{}/pdf/{}/{}'.format(cls.__name__, tipo, oid), version=v)
 
 
 class csds(Facturama):
