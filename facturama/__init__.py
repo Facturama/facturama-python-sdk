@@ -10,7 +10,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.5'
+__version__ = '3.0.6'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -65,7 +65,8 @@ class Facturama:
         cls._headers = {
             'Authorization': 'Basic %s' % (base64.b64encode(
                 ('{}:{}'.format(_username, _password)).encode('utf-8'))).decode('ascii'),
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'User-Agent': _username
         }
 
     @classmethod
@@ -101,6 +102,7 @@ class Facturama:
             '{}/api/3/'.format(host),
             '{}/api-lite/3/'.format(host),
             '{}/2/retenciones/'.format(host),
+            '{}/cfdi/status/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
@@ -163,8 +165,8 @@ class Facturama:
         :params oid: id of object retrieve
         :return: object with data from response
         """
-        params = {'type': 'issued'}
-        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None, params=params)
+        params = {'type':'issued'}
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None , params=params)
 
     @classmethod
     def all(cls, params=None):
@@ -214,15 +216,22 @@ class Client(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Clients', start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Clients' , start, length, search), version=v
         )
-
+    @classmethod
+    def listByRfc(cls, rfc):
+        """
+        :return: object with data
+        """
+        v = 0
+        return cls.build_http_request(
+            'get', '{}?keyword={}'.format(cls.__name__ , rfc), version=v
+        )
 
 class Product(Facturama):
     """
     Opr with Products of Facturama API
     """
-
     @classmethod
     def list(cls, start, length, search):
         """
@@ -232,7 +241,7 @@ class Product(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Products', start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Products' , start, length, search), version=v
         )
 
 
@@ -240,6 +249,16 @@ class BranchOffice(Facturama):
     """
     Opr with Branch Offices of Facturama API
     """
+
+class Customers(Facturama):
+
+    @classmethod
+    def validate(cls, params=None):
+        """
+        Return: object with data.
+        """
+        v = 0
+        return cls.build_http_request('post', '{}/{}'.format(cls.__name__,'validate'), params, version=v)
 
 
 class Cfdi(Facturama):
@@ -338,7 +357,7 @@ class Cfdi(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__, tipo, keyword, status), version=v
+            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, keyword, status), version=v
         )
 
     @classmethod
