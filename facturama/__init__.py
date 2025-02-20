@@ -5,7 +5,6 @@
 import base64
 from requests import request
 
-
 try:
     import json
 except ImportError:
@@ -166,8 +165,8 @@ class Facturama:
         :params oid: id of object retrieve
         :return: object with data from response
         """
-        params = {'type':'issued'}
-        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None , params=params)
+        params = {'type': 'issued'}
+        return cls.build_http_request('get', '{}/{}'.format(cls.__name__, oid), None, params=params)
 
     @classmethod
     def all(cls, params=None):
@@ -201,10 +200,7 @@ class Facturama:
         :return: None
         """
         return cls.build_http_request('delete', '{}/{}'.format(cls.__name__, oid))
-    @classmethod
-    def status(cls, uuid, issuer, receiver, total, v=8):
 
-        return cls.build_http_request('get', '?uuid={}&issuerRfc={}&receiverRfc={}&total={}'.format(uuid, issuer, receiver, total), version = v)
 
 class Client(Facturama):
     """
@@ -220,8 +216,9 @@ class Client(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Clients' , start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Clients', start, length, search), version=v
         )
+
     @classmethod
     def listByRfc(cls, rfc):
         """
@@ -229,13 +226,15 @@ class Client(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?keyword={}'.format(cls.__name__ , rfc), version=v
+            'get', '{}?keyword={}'.format(cls.__name__, rfc), version=v
         )
-    
+
+
 class Product(Facturama):
     """
     Opr with Products of Facturama API
     """
+
     @classmethod
     def list(cls, start, length, search):
         """
@@ -245,7 +244,7 @@ class Product(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?start={}&length={}&search={}'.format('Products' , start, length, search), version=v
+            'get', '{}?start={}&length={}&search={}'.format('Products', start, length, search), version=v
         )
 
 
@@ -253,6 +252,7 @@ class BranchOffice(Facturama):
     """
     Opr with Branch Offices of Facturama API
     """
+
 
 class Customers(Facturama):
 
@@ -262,14 +262,15 @@ class Customers(Facturama):
         Return: object with data.
         """
         v = 0
-        return cls.build_http_request('post', '{}/{}'.format(cls.__name__,'validate'), params, version=v)
-        
+        return cls.build_http_request('post', '{}/{}'.format(cls.__name__, 'validate'), params, version=v)
+
 
 class Cfdi(Facturama):
     """
     Opr with Cfdi of Facturama API
     """
-    #CFDI 3.3 URI v=1
+
+    # CFDI 3.3 URI v=1
     @classmethod
     def create(cls, data, v=1):
         """
@@ -279,7 +280,7 @@ class Cfdi(Facturama):
         :return: object with data from response
         """
 
-        return cls.build_http_request('post', 'cfdis' , data, version=v)
+        return cls.build_http_request('post', 'cfdis', data, version=v)
 
     # CFDI 4.0 URI v=5
     @classmethod
@@ -291,7 +292,7 @@ class Cfdi(Facturama):
         :return: object with data from response
         """
 
-        return cls.build_http_request('post', 'cfdis' , data, version=v)
+        return cls.build_http_request('post', 'cfdis', data, version=v)
 
     @classmethod
     def get_by_file(cls, f, t, oid):
@@ -347,9 +348,10 @@ class Cfdi(Facturama):
         :param oid: id object
         :return: None
         """
-        params = {'type':_type, 'motive':_motive, 'uuidReplacement':_uuidReplacement }
+        params = {'type': _type, 'motive': _motive, 'uuidReplacement': _uuidReplacement}
         v = 2 if api_lite else 0
-        return cls.build_http_request('delete', '{}/{}'.format(cls.__name__ if not api_lite else 'cfdis', oid),params=params, version=v)
+        return cls.build_http_request('delete', '{}/{}'.format(cls.__name__ if not api_lite else 'cfdis', oid),
+                                      params=params, version=v)
 
     @classmethod
     def list(cls, tipo, keyword, status):
@@ -359,7 +361,7 @@ class Cfdi(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, keyword, status), version=v
+            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__, tipo, keyword, status), version=v
         )
 
     @classmethod
@@ -369,19 +371,22 @@ class Cfdi(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__ , tipo, status, rfc), version=v
+            'get', '{}?type={}&keyword={}&status={}'.format(cls.__name__, tipo, status, rfc), version=v
         )
 
     @classmethod
-    def listAll(cls, tipo='issued', folioStart=-1, folioEnd=-1, dateStart='', dateEnd='', rfc='', status='all', orderNumber='', page=0):
+    def listAll(cls, tipo='issued', folioStart=-1, folioEnd=-1, dateStart='', dateEnd='', rfc='', status='all',
+                orderNumber='', page=0):
         """
         :return: None
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}?type={}&folioStart={}&folioEnd={}&dateStart={}&dateEnd={}&rfc={}&status={}&orderNumber={}&page={}'.format(cls.__name__ , tipo, folioStart, folioEnd,rfc,dateStart,dateEnd,status,orderNumber,page), version=v
+            'get',
+            '{}?type={}&folioStart={}&folioEnd={}&dateStart={}&dateEnd={}&rfc={}&status={}&orderNumber={}&page={}'.format(
+                cls.__name__, tipo, folioStart, folioEnd, rfc, dateStart, dateEnd, status, orderNumber, page), version=v
         )
-    
+
     @classmethod
     def listById(cls, oid, tipe):
         """
@@ -389,9 +394,10 @@ class Cfdi(Facturama):
         """
         v = 0
         return cls.build_http_request(
-            'get', '{}/{}?type={}'.format(cls.__name__ , oid, tipe), version=v
+            'get', '{}/{}?type={}'.format(cls.__name__, oid, tipe), version=v
         )
-    
+
+
 class acuse(Facturama):
 
     @classmethod
@@ -400,9 +406,7 @@ class acuse(Facturama):
         :return: object with data from response
         """
         v = 0
-        return cls.build_http_request(
-            'get', '{}/pdf/{}/{}'.format(cls.__name__ , tipo, oid), version=v)
-
+        return cls.build_http_request('get', '{}/pdf/{}/{}'.format(cls.__name__, tipo, oid), version=v)
 
 
 class csds(Facturama):
@@ -468,12 +472,14 @@ class OriginSourcesCatalog(Catalogs):
     prefix = 'catalogs'
     catalog = 'originsources'
 
+
 class DeductionsCatalog(Catalogs):
     """
     Opr with deductions catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'deductions'
+
 
 class Incapacities(Catalogs):
     """
@@ -482,18 +488,23 @@ class Incapacities(Catalogs):
     prefix = 'catalogs'
     catalog = 'incapacities'
 
+
 class ExtraHours(Catalogs):
     """
     Opr with extrahours catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'extrahours'
+
+
 class ProductsServicesCatalog(Catalogs):
     """
     Opr with Product or Services catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'ProductsOrServices'
+
+
 class ContractTypes(Catalogs):
     """
     Opr with ContractTypes catalog of Facturama API
@@ -501,42 +512,55 @@ class ContractTypes(Catalogs):
     prefix = 'catalogs'
     catalog = 'ContractTypes'
 
+
 class Banks(Catalogs):
     """
     Opr with banks catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'banks'
+
+
 class Perceptions(Catalogs):
     """
     Opr with perceptions catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'perceptions'
+
+
 class Deductions(Catalogs):
     """
     Opr with deductions catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'deductions'
+
+
 class OtherPayments(Catalogs):
     """
     Opr with otherpayments catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'otherpayments'
+
+
 class TypesOfJourney(Catalogs):
     """
     Opr with typesofjourney catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'typesofjourney'
+
+
 class PositionRisks(Catalogs):
     """
     Opr with positionrisks catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'positionrisks'
+
+
 class PaymentFrequencies(Catalogs):
     """
     Opr with paymentfrequencies catalog of Facturama API
@@ -544,12 +568,15 @@ class PaymentFrequencies(Catalogs):
     prefix = 'catalogs'
     catalog = 'paymentfrequencies'
 
+
 class RegimenTypes(Catalogs):
     """
     Opr with regimentypes catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'regimentypes'
+
+
 class PostalCodesCatalog(Catalogs):
     """
     Opr with PostalCodes catalog of Facturama API
@@ -557,12 +584,14 @@ class PostalCodesCatalog(Catalogs):
     prefix = 'catalogs'
     catalog = 'PostalCodes'
 
+
 class UnitsCatalog(Catalogs):
     """
     Opr with Units catalog of Facturama API
     """
     prefix = 'catalogs'
     catalog = 'Units'
+
 
 class CurrenciesCatalog(Catalogs):
     """
@@ -635,6 +664,23 @@ class CfdiUsesCatalog(Catalogs):
     prefix = 'catalogs'
     catalog = 'CfdiUses'
 
+
+class TariffFractionsCatalog(Catalogs):
+    """
+    Opr with TariffFractions catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'TariffFractions'
+
+
+class CustomsUnitsCatalog(Catalogs):
+    """
+    Opr with CustomsUnits catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'CustomsUnits'
+
+
 class CfdiMultiEmisor(Facturama):
     """
     Opr with Cfdi of Facturama API
@@ -650,7 +696,7 @@ class CfdiMultiEmisor(Facturama):
         """
         return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
 
-    #CFDI 4.0 Multiemisor
+    # CFDI 4.0 Multiemisor
     @classmethod
     def create3(cls, data, v=6):
         """
@@ -661,7 +707,6 @@ class CfdiMultiEmisor(Facturama):
         """
         return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
 
-
     @classmethod
     def retrieve(cls, oid, params=None):
         """
@@ -670,7 +715,7 @@ class CfdiMultiEmisor(Facturama):
         :return: object with data from response
         """
         return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), params=params, version=2)
-        #return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=3)
+        # return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=3)
 
     @classmethod
     def get_by_file(cls, f, t, oid):
@@ -684,7 +729,7 @@ class CfdiMultiEmisor(Facturama):
         """
         :return: get cfdi file by format and type
         """
-        html_file = cls.get_by_file('pdf', 'IssuedLite',oid)
+        html_file = cls.get_by_file('pdf', 'IssuedLite', oid)
         cls.api_lite = True
         with open(fileName, 'wb') as f:
             f.write(base64.urlsafe_b64decode(html_file['Content'].encode('utf-8')))
@@ -718,8 +763,8 @@ class CfdiMultiEmisor(Facturama):
         :param oid: id object
         :return: None
         """
-        params = {'motive':_motive, 'uuidReplacement':_uuidReplacement }
-        return cls.build_http_request('delete', '{}/{}'.format('cfdis', oid),params=params, version=2)
+        params = {'motive': _motive, 'uuidReplacement': _uuidReplacement}
+        return cls.build_http_request('delete', '{}/{}'.format('cfdis', oid), params=params, version=2)
 
     @classmethod
     def list(cls, filters):
@@ -727,8 +772,7 @@ class CfdiMultiEmisor(Facturama):
         :param filters: dict filters
         :return: None
         """
-        return cls.build_http_request('get','cfdis', params=filters, version=2)
-
+        return cls.build_http_request('get', 'cfdis', params=filters, version=2)
 
     @classmethod
     def detail(cls, oid):
@@ -805,7 +849,6 @@ class csdsMultiEmisor(Facturama):
             'Rfc': str(rfc).upper(), 'Certificate': file_cer, 'PrivateKey': file_key, 'PrivateKeyPassword': password
         }
         return cls.build_http_request('put', '{}/{}'.format('csds', rfc), data, version=2)
-
 
     @classmethod
     def delete(cls, rfc):
@@ -895,12 +938,12 @@ class Retentions(Facturama):
             'delete', oid, version=4)
 
     @classmethod
-    def list(cls, filters = None):
+    def list(cls, filters=None):
         """
         :param filters: dict filters
         :return: None
         """
-        return cls.build_http_request('get','', params=filters, version=4)
+        return cls.build_http_request('get', '', params=filters, version=4)
 
     @classmethod
     def sendByMail(cls, oid, email):
@@ -908,4 +951,4 @@ class Retentions(Facturama):
         :param filters: dict filters
         :return: None
         """
-        return cls.build_http_request('post','envia?id={}&email={}'.format(oid, email), None, version=4)
+        return cls.build_http_request('post', 'envia?id={}&email={}'.format(oid, email), None, version=4)
