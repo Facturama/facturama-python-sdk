@@ -4,14 +4,13 @@
 
 import base64
 from requests import request
-from simplejson.errors import JSONDecodeError
 
 try:
     import json
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.6'
+__version__ = '3.0.7'
 __author__ = 'Raul Granados'
 
 api_lite = False
