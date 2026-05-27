@@ -10,7 +10,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.7'
+__version__ = '3.0.8'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -715,6 +715,13 @@ class CustomsUnitsCatalog(Catalogs):
     """
     prefix = 'catalogs'
     catalog = 'CustomsUnits'
+
+class NeighborhoodsCatalog(Catalogs):
+    """
+    Opr with Neighborhoods catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'Neighborhoods'
 
 
 class CfdiMultiEmisor(Facturama):

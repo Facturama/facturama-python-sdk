@@ -177,7 +177,6 @@ def test_create_cfdi4_api_web():
 
 def test_catalog():
     print("=== Test Catalog ===")
-    facturama._credentials = ('pruebas', 'pruebas2011')
 
     facturama.api_lite = False  # Multi Issuer Mode
     facturama.sandbox = True  # Sandbox environment
@@ -208,8 +207,11 @@ def test_catalog():
     # print(lst_clients["data"][0]['Id'])
 
     # Codigos postales
-    # cfdiPostalCode=facturama.PostalCodesCatalog.query({'keyword':'78140'})
-    # print(cfdiPostalCode)
+    cfdiPostalCode=facturama.PostalCodesCatalog.query({'keyword':'78140'})
+    print(cfdiPostalCode)
+
+    cfdiNeibhborhood=facturama.NeighborhoodsCatalog.query({'postalCode':'78140'})
+    print(cfdiNeibhborhood)
 
     # ContractTypes
     # lst_payment=facturama.ContractTypes.query()
@@ -308,15 +310,29 @@ def test_getAcuse():
     facturama.sandbox = True  # Sandbox environment 
     print(facturama.acuse.saveAsPdf("51ynX1RzyrxQVwm-Ie59EQ2", "issued"))
 
+def test_descarga():
+
+    print("Prueba de descargar xml y pdf prod")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = False  # Sandbox environment
+    print(facturama.Cfdi.saveAsPdf("_uKo5ila0X-zXBBf2xIpEg2", "prod.pdf")) 
+
+    print("Prueba de descargar xml y pdf sandbox")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = True  # Sandbox environment
+    print(facturama.Cfdi.saveAsPdf("M5cxr0rkFNA6m7_f_-idvA2", "sandbox.pdf")) 
 
 
 if __name__ == "__main__":
-    print("### Test Facturama API Web ###")
-    print("")
+    #print("### Test Facturama API Web ###")
+    #print("")
     # test_create_cfdi_api_web()# CFDI 3.3
     # test_create_cfdi4_api_web()# CFDI 4.0 test
-    # test_catalog()
+    test_catalog()
     #test_list()
     #test_validar()
     #test_getAcuse()
+    #test_descarga()
 
