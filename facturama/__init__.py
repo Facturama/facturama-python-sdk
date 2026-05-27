@@ -10,7 +10,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.7'
+__version__ = '3.0.8'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -716,6 +716,13 @@ class CustomsUnitsCatalog(Catalogs):
     prefix = 'catalogs'
     catalog = 'CustomsUnits'
 
+class NeighborhoodsCatalog(Catalogs):
+    """
+    Opr with Neighborhoods catalog of Facturama API
+    """
+    prefix = 'catalogs'
+    catalog = 'Neighborhoods'
+
 
 class CfdiMultiEmisor(Facturama):
     """
@@ -817,6 +824,14 @@ class CfdiMultiEmisor(Facturama):
         :return: None
         """
         return cls.build_http_request('get', '{}/{}'.format('cfdis', oid), version=2)
+    
+    @classmethod
+    def sent_by_email(cls, oid, email, subject = None, comments = None, issuerEmail = None):
+        """
+        :return: send Cfdi by email
+        """
+        type = 'issuedLite'
+        return cls.build_http_request('post', '{}?cfdiType={}&cfdiId={}&email={}&subject={}&comments={}&issuerEmail={}'.format('Cfdi', type, oid, email, subject, comments, issuerEmail))
 
 
 class csdsMultiEmisor(Facturama):

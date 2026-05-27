@@ -324,7 +324,7 @@ def test_catalog():
 
 
 def test_update_csd():
-    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama._credentials = ('tu_usuario', 'tu_contraseña')
     facturama.api_lite = True
     facturama.sandbox = True
     facturama.csdsMultiEmisor.upload('RFC', 'csd.key', 'CSD.cer', 'pass')
@@ -332,6 +332,20 @@ def test_update_csd():
     print (csd.Rfc)
 
     #facturama.csdsMultiEmisor.delete('EKU9003173C9')
+
+def test_send_email():
+    print ("=== Test Send Email ===")
+    facturama._credentials = ('tu_usuario', 'tu_contraseña')
+    facturama.api_lite = True
+    facturama.sandbox = True
+    facturama.CfdiMultiEmisor.sent_by_email(
+        'TrsnHF_wdoaoYtnIirrvHg2',
+        'ejemplo@ejemplo2.mx',
+        '',
+        '',
+        'ejemplo@ejemplo.com')
+        
+
 
 
 if __name__ == "__main__":
@@ -342,4 +356,5 @@ if __name__ == "__main__":
     #test_create_cfdi40_multi()
     #test_update_csd()
     #test_catalog()
+    #test_send_email()
 
