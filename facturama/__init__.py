@@ -10,7 +10,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.8'
+__version__ = '3.0.9'
 __author__ = 'Raul Granados'
 
 api_lite = False
