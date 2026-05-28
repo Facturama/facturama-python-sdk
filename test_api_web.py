@@ -324,15 +324,23 @@ def test_descarga():
     facturama.sandbox = True  # Sandbox environment
     print(facturama.Cfdi.saveAsPdf("M5cxr0rkFNA6m7_f_-idvA2", "sandbox.pdf")) 
 
+def test_send_by_email():
+    print("Prueba de enviar por correo")
+    facturama._credentials = ('pruebas', 'pruebas2011')
+    facturama.api_lite = False  # Multi Issuer Mode
+    facturama.sandbox = True  # Sandbox environment
+    print(facturama.Cfdi.send_by_email("issued","MIPKGwSa7FiuZDEcjJihIg2", "ejemplo@ejemplo.mx", "Test Subject", "Test Comments"))
+
 
 if __name__ == "__main__":
     #print("### Test Facturama API Web ###")
     #print("")
     # test_create_cfdi_api_web()# CFDI 3.3
     # test_create_cfdi4_api_web()# CFDI 4.0 test
-    test_catalog()
+    #test_catalog()
     #test_list()
     #test_validar()
     #test_getAcuse()
     #test_descarga()
+    #test_send_by_email()
 

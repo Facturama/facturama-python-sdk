@@ -10,7 +10,7 @@ try:
 except ImportError:
     import simplejson as json
 
-__version__ = '3.0.8'
+__version__ = '3.0.9'
 __author__ = 'Raul Granados'
 
 api_lite = False
@@ -372,11 +372,16 @@ class Cfdi(Facturama):
         return f
 
     @classmethod
-    def send_by_email(cls, t, oid, email):
+    def send_by_email(cls, t, oid, email, subject = None, comments = None):
         """
         :return: send Cfdi by email
         """
-        return cls.build_http_request('post', '{}?cfdiType={}&cfdiId={}&email={}'.format(cls.__name__, t, oid, email))
+        params = {'cfdiType': t, 'cfdiId': oid, 'email': email}
+        if subject is not None:
+            params['subject'] = subject
+        if comments is not None:
+            params['comments'] = comments
+        return cls.build_http_request('post', '{}'.format(cls.__name__), params=params)
 
     @classmethod
     def delete(cls, oid, _type, _motive, _uuidReplacement=None):
