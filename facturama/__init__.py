@@ -112,6 +112,7 @@ class Facturama:
             '{}/api-lite/3/'.format(host),
             '{}/2/retenciones/'.format(host),
             '{}/cfdi/status/'.format(host),
+            '{}/api-lite/4/'.format(host),
         ]
         api_base = uris[version]
         cls.aut_api()
