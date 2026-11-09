@@ -747,13 +747,16 @@ class CfdiMultiEmisor(Facturama):
 
     # CFDI 4.0 Multiemisor
     @classmethod
-    def create3(cls, data, v=6):
+    def create3(cls, data, v=6, is_lite4=False):
         """
 
-        :param v: 6 for /api-lite/3/
+        :param v: 6 for /api-lite/3/ (solo aplica si api_lite4=False)
         :param data: dict with data for create object
+        :param lite4: True usa /api-lite/4/ (v=9) e ignora v; False usa v
         :return: object with data from response
         """
+        if is_lite4:
+            v = 9
         return cls.build_http_request('post', cls.__name__ if not api_lite else 'cfdis', data, version=v)
 
     @classmethod
